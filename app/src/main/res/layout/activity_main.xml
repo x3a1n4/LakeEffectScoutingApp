@@ -15,8 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/infoBar">
-        <TableRow
-            android:weightSum="3">
+        <TableRow>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -24,56 +23,58 @@
                 android:id="@+id/robotNum"
                 android:layout_weight="1"
                 android:textSize="@dimen/text_small"/>
+        </TableRow>
 
-
-            <LinearLayout
-                android:orientation="vertical">
-                <RelativeLayout
-                    android:layout_width="match_parent"
+        <TableRow>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/deviceNameLayout"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id = "@+id/deviceNameLayout"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Device Name: "
-                        android:id="@+id/deviceNameTextView"
-                        android:textSize="@dimen/text_medium"/>
+                    android:text="Device Name: "
+                    android:id="@+id/deviceNameTextView"
+                    android:textSize="@dimen/text_small"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="XXXXXXX"
-                        android:id="@+id/deviceName"
-                        android:textStyle="bold"
-                        android:layout_toRightOf="@id/deviceNameTextView"
-                        android:textSize="@dimen/text_medium"/>
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id = "@+id/matchesLeftLayout"
-                    android:layout_centerHorizontal="true"
-                    android:layout_weight="1">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Matches Until Off: "
-                        android:id="@+id/matchesLeftTextView"
-                        android:textSize="@dimen/text_small"/>
+                    android:text="XXXXXXX"
+                    android:id="@+id/deviceName"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@id/deviceNameTextView"
+                    android:textSize="@dimen/text_small"/>
+            </RelativeLayout>
+        </TableRow>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="XXXXXXX"
-                        android:id="@+id/matchesLeft"
-                        android:textStyle="bold"
-                        android:layout_toRightOf="@id/matchesLeftTextView"
-                        android:textSize="@dimen/text_small"/>
-                </RelativeLayout>
-            </LinearLayout>
+        <TableRow>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id = "@+id/matchesLeftLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Matches Until Off: "
+                    android:id="@+id/matchesLeftTextView"
+                    android:textSize="@dimen/text_small"/>
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XXXXXXX"
+                    android:id="@+id/matchesLeft"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@id/matchesLeftTextView"
+                    android:textSize="@dimen/text_small"/>
+            </RelativeLayout>
+        </TableRow>
+        <TableRow
+            android:weightSum="3">
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

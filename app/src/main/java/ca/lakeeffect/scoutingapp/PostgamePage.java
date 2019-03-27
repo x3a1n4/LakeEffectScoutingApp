@@ -44,7 +44,6 @@ public class PostgamePage extends Fragment {
 
         final Spinner endgameClimbType = (Spinner) view.findViewById(R.id.endgameClimbType);
         final Spinner endgameClimb = (Spinner) view.findViewById(R.id.endgameClimb);
-
         endgameClimb.setVisibility(View.INVISIBLE);
 
         endgameClimbType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

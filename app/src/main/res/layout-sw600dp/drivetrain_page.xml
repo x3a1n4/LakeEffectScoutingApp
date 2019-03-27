@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id = "@+id/drivetrainPageLayout">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/drivetrainPageGrid"
+            app:rowCount="4"
+            app:columnCount="3"
+            app:orientation="vertical"
+            android:layout_margin="10dp">
+
+
+            <TextView
+                android:text="Drive train: "
+                android:textSize="@dimen/text_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:layout_alignTop="@+id/tableLayout"
+                app:layout_row="0"
+                app:layout_column="0"
+                app:layout_columnSpan="1"
+                />
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:hint="Describe their drive train"
+                android:id="@+id/drivetrainDescription"
+                android:textSize="@dimen/text_small"
+                app:layout_gravity="fill_horizontal"
+                app:layout_row="0"
+                app:layout_column="1"
+                app:layout_columnSpan="2" />
+
+            <TextView
+                android:text="Add A Motor:"
+                android:textSize="@dimen/text_medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:paddingRight="20dp"
+                app:layout_row="1"
+                app:layout_column="0"
+                app:layout_columnSpan="1"
+                />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize = "@dimen/text_small"
+                android:id="@+id/motorTypes"
+                android:spinnerMode="dropdown"
+                app:layout_row="1"
+                app:layout_column="1"
+                app:layout_columnSpan="2"
+                app:layout_gravity="fill_horizontal|fill_vertical"/>
+
+            <TextView
+                android:text="Geared For:  "
+                android:textSize="@dimen/text_medium"
+                android:id="@+id/gearedForTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                app:layout_row="2"
+                app:layout_column="0"
+                app:layout_columnSpan="1" />
+
+            <CheckBox
+                app:layout_gravity="fill_horizontal"
+                app:layout_columnWeight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="2"
+                app:layout_column="1"
+                android:checked="false"
+                android:text="Power"
+                android:textSize="@dimen/text_small"
+                android:id="@+id/gearedForPower"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="2"
+                app:layout_column="2"
+                android:id="@+id/gearedForSpeed"
+                app:layout_columnWeight="1"
+                android:text="Speed"
+                android:textSize="@dimen/text_small"/>
+
+            <CheckBox
+                app:layout_gravity="fill_horizontal"
+                android:id="@+id/gearedForBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="3"
+                app:layout_column="1"
+                android:checked="false"
+                android:text="Balance"
+                android:textSize="@dimen/text_small" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="3"
+                app:layout_column="2"
+                android:id="@+id/gearedForShifting"
+                app:layout_columnWeight="1"
+                android:text="Shifting"
+                android:textSize="@dimen/text_small"/>
+
+        </android.support.v7.widget.GridLayout>
+
+    </ScrollView>
+
+</android.support.percent.PercentRelativeLayout>

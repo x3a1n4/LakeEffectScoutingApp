@@ -46,4 +46,13 @@
         <item>Level 1 (HAB)</item>
         <item>Level 2</item>
     </string-array>
+
+    <string-array name="motorTypes">
+        <item>Choose One</item>
+        <item>Cim Motors</item>
+        <item>Mini Cims</item>
+        <item>Neo Motors</item>
+        <item>775 pros</item>
+        <item>Other</item>
+    </string-array>
 </resources>
