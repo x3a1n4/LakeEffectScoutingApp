@@ -71,6 +71,7 @@
 
             <GridLayout
                 android:id="@+id/drivetrainPageGrid"
+                android:layout_width="match_parent"
                 app:layout_row="2"
                 app:layout_column="0"
                 app:layout_columnSpan="3"
@@ -83,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/motorTitle"
-                    app:layout_gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
                     android:paddingVertical="10dp"
                     app:layout_row="2"
                     app:layout_column="0" />

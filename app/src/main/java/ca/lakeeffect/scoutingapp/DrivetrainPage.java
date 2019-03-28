@@ -1,5 +1,6 @@
 package ca.lakeeffect.scoutingapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -58,7 +59,63 @@ public class DrivetrainPage extends Fragment {
 
                 if(pos != 0){
                     drivetrainPageGrid.setRowCount(drivetrainPageGrid.getRowCount() + 1);
+
+
+
                 }
+
+                /*
+                // Used to save exist password element count.
+                int existPasswordRowNumber = 0;
+
+                // Get all GridLayout child count.
+                int childCount = gridLayout.getChildCount();
+
+                // Loop all the GridLayout child.
+                for(int i=0;i<childCount;i++)
+                {
+                    // If one child is EditText type.
+                    Object child = gridLayout.getChildAt(i);
+                    if(child instanceof EditText)
+                    {
+                        // Get it's input type.
+                        EditText editText = (EditText)child;
+                        int inputType = editText.getInputType();
+
+                        // If the edit text input type is password. The real value is 129 which is InputType.TYPE_TEXT_VARIATION_PASSWORD + 1.
+                        if(inputType == InputType.TYPE_TEXT_VARIATION_PASSWORD + 1)
+                        {
+                            // Exist password row number plus 1.
+                            existPasswordRowNumber++;
+                        }
+                    }
+                }
+
+                // Get application context.
+                Context context = getApplicationContext();
+
+                // Create a text view component.
+                TextView passwordTextView = new TextView(context);
+                // Set password label text value.
+                passwordTextView.setText("Password " + existPasswordRowNumber + ":");
+
+                // Create a edit text component.
+                EditText passwordEditText = new EditText(context);
+                // Set edit text input type to password.
+                passwordEditText.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD + 1);
+                // Set edit text size to 10 ems.
+                passwordEditText.setEms(10);
+
+                // Insert password label at last third position.
+                gridLayout.addView(passwordTextView, childCount - 2);
+
+                // Recalculate gridlayout child count again.
+                childCount = gridLayout.getChildCount();
+                // Insert password input box at last third position again.
+                gridLayout.addView(passwordEditText, childCount - 2);
+
+                FROM file:///C:/Users/Xan/AppData/Local/Microsoft/Windows/INetCache/IE/I3LIY8HA/Android_Gridlayout_Example_Programmatically[1].mhtml
+                */
             }
 
             @Override
