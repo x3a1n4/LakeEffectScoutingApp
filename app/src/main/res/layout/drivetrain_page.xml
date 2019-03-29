@@ -17,7 +17,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            app:rowCount="5"
+            app:rowCount="6"
             app:columnCount="3"
             app:orientation="vertical"
             android:layout_margin="10dp"
@@ -77,7 +77,8 @@
                 app:layout_columnSpan="3"
                 app:layout_gravity="fill_horizontal"
                 android:rowCount="1"
-                android:columnCount="2">
+                android:columnCount="2"
+                android:layout_marginVertical="30dp">
             </GridLayout>
 
 
@@ -130,6 +131,16 @@
                 android:id="@+id/gearedForShifting"
                 android:text="Shifting"
                 android:textSize="@dimen/text_small"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_row="5"
+                app:layout_column="0"
+                app:layout_columnSpan="3"
+                android:hint="Notes"
+                android:textSize="@dimen/text_small"
+                android:layout_marginBottom="50dp"/>
 
         </android.support.v7.widget.GridLayout>
 

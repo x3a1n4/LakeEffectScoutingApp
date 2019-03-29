@@ -37,13 +37,19 @@ public class Counter extends LinearLayout implements View.OnClickListener {
 
         counterText = findViewById(R.id.counterText);
 
-        for (int i = 0; i < attrs.getAttributeCount(); i++) {
-            System.out.println(attrs.getAttributeName(i) + "\t" + attrs.getAttributeValue(i));
-            if (attrs.getAttributeName(i).equals("MaxValue")) {
-                max = Integer.parseInt(attrs.getAttributeValue(i));
-                break;
+        try{
+            for (int i = 0; i < attrs.getAttributeCount(); i++) {
+                System.out.println(attrs.getAttributeName(i) + "\t" + attrs.getAttributeValue(i));
+                if (attrs.getAttributeName(i).equals("MaxValue")) {
+                    max = Integer.parseInt(attrs.getAttributeValue(i));
+                    break;
+                }
             }
+        }catch (NullPointerException e){
+            //help this is my first try/catch
         }
+
+
     }
 
     public void onClick(View view) {

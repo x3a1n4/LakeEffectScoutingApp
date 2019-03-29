@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -107,6 +109,11 @@ public class DrivetrainPage extends Fragment {
                         TextView textView = new TextView(context);
                         textView.setText(item + ": ");
                         textView.setTextSize(getResources().getDimension(R.dimen.text_small) / 3); //TODO: find out why I need to divide by 3
+
+                        //from https://stackoverflow.com/questions/8049620/how-to-set-layout-gravity-programmatically
+                        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                        params.setGravity(Gravity.CENTER_VERTICAL);
+                        textView.setLayoutParams(params);
                         System.out.println(getResources().getDimension(R.dimen.text_small));
                         System.out.println("Text size");
 
@@ -117,8 +124,11 @@ public class DrivetrainPage extends Fragment {
                     //Recalculate gridlayout child count again.
                     childCount = drivetrainPageGrid.getChildCount();
                     //Add the counter
-                    drivetrainPageGrid.addView(LayoutInflater.from(context).inflate(R.layout.counter, null), childCount);
-
+                    Counter counter = new Counter(context, null);
+                    counter.max = 999999;
+                    View newCounter = LayoutInflater.from(context).inflate(R.layout.counter, null);
+                    drivetrainPageGrid.addView(counter, childCount);
+                    drivetrainPageGrid.invalidate();
                 }
 
                 /*
@@ -173,6 +183,7 @@ public class DrivetrainPage extends Fragment {
 
                 FROM file:///C:/Users/Xan/AppData/Local/Microsoft/Windows/INetCache/IE/I3LIY8HA/Android_Gridlayout_Example_Programmatically[1].mhtml
                 Should change that to the actual URL but I can do that later
+                Nope I can't find it
                 */
             }
 
