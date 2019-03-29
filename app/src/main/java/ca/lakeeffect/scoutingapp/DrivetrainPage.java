@@ -72,31 +72,47 @@ public class DrivetrainPage extends Fragment {
                 System.out.println("Position and layout params");
 
                 //if it isn't the first item in the grid or "Other"
-                if(pos != 0 && item != "Other"){
+                if(pos != 0){
                     //add a row to the gridview
                     drivetrainPageGrid.setRowCount(drivetrainPageGrid.getRowCount() + 1);
-
-                    //get all the items and put them in a list
-                    List<String> newMotorChooserList = MainActivity.retrieveAllItems(motorChooser);
-                    //and remove the selected item
-                    newMotorChooserList.remove(pos);
-                    //then set the spinner to that
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                            context,
-                            android.R.layout.simple_list_item_1,
-                            newMotorChooserList);
-                    motorChooser.setAdapter(adapter);
 
                     //find how many children the gridlayout has
                     int childCount = drivetrainPageGrid.getChildCount();
 
-                    // Create a text view component.
-                    TextView textView = new TextView(context);
-                    textView.setText(item + ": ");
-                    textView.setTextSize(17); //TODO: make this automatically be the small text size
+                    //if it's the last item in the spinner
+                    if(pos == MainActivity.retrieveAllItems(motorChooser).size() - 1){
+                        // Create an editText view component.
+                        EditText editText = new EditText(context);
+                        editText.setHint("Motor type");
+                        editText.setTextSize(getResources().getDimension(R.dimen.text_small) / 3); //TODO: find out why I need to divide by 3
 
-                    //Add it at the end
-                    drivetrainPageGrid.addView(textView, childCount);
+                        //Add it at the end
+                        drivetrainPageGrid.addView(editText, childCount);
+
+                        //Now set the selected item to "Choose one"
+                        parent.setSelection(0);
+                    }else{
+                        //get all the items and put them in a list
+                        List<String> newMotorChooserList = MainActivity.retrieveAllItems(motorChooser);
+                        //and remove the selected item
+                        newMotorChooserList.remove(pos);
+                        //then set the spinner to that
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                                context,
+                                android.R.layout.simple_list_item_1,
+                                newMotorChooserList);
+                        motorChooser.setAdapter(adapter);
+
+                        //Now create a text view component.
+                        TextView textView = new TextView(context);
+                        textView.setText(item + ": ");
+                        textView.setTextSize(getResources().getDimension(R.dimen.text_small) / 3); //TODO: find out why I need to divide by 3
+                        System.out.println(getResources().getDimension(R.dimen.text_small));
+                        System.out.println("Text size");
+
+                        //Add it at the end
+                        drivetrainPageGrid.addView(textView, childCount);
+                    }
 
                     //Recalculate gridlayout child count again.
                     childCount = drivetrainPageGrid.getChildCount();
@@ -104,9 +120,6 @@ public class DrivetrainPage extends Fragment {
                     drivetrainPageGrid.addView(LayoutInflater.from(context).inflate(R.layout.counter, null), childCount);
 
                 }
-
-
-
 
                 /*
                 // Used to save exist password element count.

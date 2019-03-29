@@ -59,6 +59,7 @@ public class Counter extends LinearLayout implements View.OnClickListener {
                 count = 0;
             }
         }
+        System.out.println("You hit a button");
         counterText.setText(count + "");
     }
 
