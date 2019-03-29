@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize = "@dimen/text_small"
-                android:id="@+id/motorTypes"
+                android:id="@+id/motorChooser"
                 android:spinnerMode="dropdown"
                 app:layout_row="1"
                 app:layout_column="1"

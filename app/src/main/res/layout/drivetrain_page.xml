@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize = "@dimen/text_small"
-                android:id="@+id/motorTypes"
+                android:id="@+id/motorChooser"
                 android:spinnerMode="dropdown"
                 app:layout_row="1"
                 app:layout_column="1"
@@ -78,24 +78,6 @@
                 app:layout_gravity="fill_horizontal"
                 android:rowCount="1"
                 android:columnCount="2">
-                <TextView
-                    android:text="Motor:  "
-                    android:textSize="@dimen/text_small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/motorTitle"
-                    android:layout_gravity="center_vertical"
-                    android:paddingVertical="10dp"
-                    app:layout_row="2"
-                    app:layout_column="0" />
-                <ca.lakeeffect.scoutingapp.Counter
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/motorCount"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    app:layout_row="2"
-                    app:layout_column="1" />
             </GridLayout>
 
 

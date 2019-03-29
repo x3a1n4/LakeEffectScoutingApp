@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -1190,6 +1191,18 @@ public class MainActivity extends ListeningActitivty {
             }
         }
         return false;
+    }
+
+    //From https://stackoverflow.com/questions/32127374/android-how-to-get-all-items-in-a-spinner
+    public static List<String> retrieveAllItems(Spinner theSpinner) {
+        Adapter adapter = theSpinner.getAdapter();
+        int n = adapter.getCount();
+        List<String> strings = new ArrayList<String>(n);
+        for (int i = 0; i < n; i++) {
+            String string = (String) adapter.getItem(i);
+            strings.add(string);
+        }
+        return strings;
     }
 
      public static void startNotificationAlarm(Context context) {

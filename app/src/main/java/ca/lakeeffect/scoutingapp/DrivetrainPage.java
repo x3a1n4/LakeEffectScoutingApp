@@ -21,6 +21,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Ajay on 9/25/2016.
  */
@@ -38,31 +42,71 @@ public class DrivetrainPage extends Fragment {
 
         view.setTag("page1");
 
-        Spinner motorTypes = view.findViewById(R.id.motorTypes);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.motorTypes, R.layout.spinner);
-        motorTypes.setAdapter(adapter);
+        final Spinner motorChooser = view.findViewById(R.id.motorChooser);
+
+        final List<String> motorTypes = Arrays.asList(getResources().getStringArray(R.array.motorTypes));
+
+        final Context context = this.getContext();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                context,
+                android.R.layout.simple_list_item_1,
+                motorTypes);
+        motorChooser.setAdapter(adapter);
+
+        System.out.println(motorTypes);
+        System.out.println("list of strings");
+
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.motorTypes, R.layout.spinner);
+        //motorChooser.setAdapter(adapter);
 
         final GridLayout drivetrainPageGrid = view.findViewById(R.id.drivetrainPageGrid);
 
-        final TextView motorTitle = view.findViewById(R.id.motorTitle);
-        final ca.lakeeffect.scoutingapp.Counter motorCount = view.findViewById(R.id.motorCount);
-
-
-        motorTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        motorChooser.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                Object item = parent.getItemAtPosition(pos);
+                String item = parent.getSelectedItem().toString();
 
                 System.out.println(pos);
-                System.out.println(motorCount.getLayoutParams());
+                System.out.println(item);
+                System.out.println(MainActivity.retrieveAllItems(motorChooser));
                 System.out.println("Position and layout params");
 
-                if(pos != 0){
+                //if it isn't the first item in the grid or "Other"
+                if(pos != 0 && item != "Other"){
+                    //add a row to the gridview
                     drivetrainPageGrid.setRowCount(drivetrainPageGrid.getRowCount() + 1);
 
+                    //get all the items and put them in a list
+                    List<String> newMotorChooserList = MainActivity.retrieveAllItems(motorChooser);
+                    //and remove the selected item
+                    newMotorChooserList.remove(pos);
+                    //then set the spinner to that
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                            context,
+                            android.R.layout.simple_list_item_1,
+                            newMotorChooserList);
+                    motorChooser.setAdapter(adapter);
 
+                    //find how many children the gridlayout has
+                    int childCount = drivetrainPageGrid.getChildCount();
+
+                    // Create a text view component.
+                    TextView textView = new TextView(context);
+                    textView.setText(item + ": ");
+                    textView.setTextSize(17); //TODO: make this automatically be the small text size
+
+                    //Add it at the end
+                    drivetrainPageGrid.addView(textView, childCount);
+
+                    //Recalculate gridlayout child count again.
+                    childCount = drivetrainPageGrid.getChildCount();
+                    //Add the counter
+                    drivetrainPageGrid.addView(LayoutInflater.from(context).inflate(R.layout.counter, null), childCount);
 
                 }
+
+
+
 
                 /*
                 // Used to save exist password element count.
@@ -115,6 +159,7 @@ public class DrivetrainPage extends Fragment {
                 gridLayout.addView(passwordEditText, childCount - 2);
 
                 FROM file:///C:/Users/Xan/AppData/Local/Microsoft/Windows/INetCache/IE/I3LIY8HA/Android_Gridlayout_Example_Programmatically[1].mhtml
+                Should change that to the actual URL but I can do that later
                 */
             }
 
