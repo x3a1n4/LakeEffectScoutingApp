@@ -139,6 +139,7 @@
                 app:layout_column="0"
                 app:layout_columnSpan="3"
                 android:hint="Notes"
+                android:id="@+id/notes"
                 android:textSize="@dimen/text_small"
                 android:layout_marginBottom="50dp"/>
 

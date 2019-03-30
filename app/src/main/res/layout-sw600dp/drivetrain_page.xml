@@ -17,11 +17,11 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/drivetrainPageGrid"
-            app:rowCount="4"
+            app:rowCount="6"
             app:columnCount="3"
             app:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            >
 
 
             <TextView
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Describe their drive train"
                 android:id="@+id/drivetrainDescription"
-                android:textSize="@dimen/text_small"
+                android:textSize="@dimen/text_medium"
                 app:layout_gravity="fill_horizontal"
                 app:layout_row="0"
                 app:layout_column="1"
@@ -61,13 +61,27 @@
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize = "@dimen/text_small"
+                android:textSize="@dimen/text_medium"
                 android:id="@+id/motorChooser"
                 android:spinnerMode="dropdown"
                 app:layout_row="1"
                 app:layout_column="1"
                 app:layout_columnSpan="2"
                 app:layout_gravity="fill_horizontal|fill_vertical"/>
+
+            <GridLayout
+                android:id="@+id/drivetrainPageGrid"
+                android:layout_width="match_parent"
+                app:layout_row="2"
+                app:layout_column="0"
+                app:layout_columnSpan="3"
+                app:layout_gravity="fill_horizontal"
+                android:rowCount="1"
+                android:columnCount="2"
+                android:layout_marginVertical="30dp">
+            </GridLayout>
+
+
 
             <TextView
                 android:text="Geared For:  "
@@ -76,52 +90,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="10dp"
-                app:layout_row="2"
+                app:layout_row="3"
                 app:layout_column="0"
                 app:layout_columnSpan="1" />
 
             <CheckBox
-                app:layout_gravity="fill_horizontal"
-                app:layout_columnWeight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_row="2"
+                app:layout_row="3"
                 app:layout_column="1"
                 android:checked="false"
                 android:text="Power"
-                android:textSize="@dimen/text_small"
+                android:textSize="@dimen/text_medium"
                 android:id="@+id/gearedForPower"/>
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_row="2"
+                app:layout_row="3"
                 app:layout_column="2"
                 android:id="@+id/gearedForSpeed"
-                app:layout_columnWeight="1"
                 android:text="Speed"
-                android:textSize="@dimen/text_small"/>
+                android:textSize="@dimen/text_medium"/>
 
             <CheckBox
-                app:layout_gravity="fill_horizontal"
                 android:id="@+id/gearedForBalance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_row="3"
+                app:layout_row="4"
                 app:layout_column="1"
                 android:checked="false"
                 android:text="Balance"
-                android:textSize="@dimen/text_small" />
+                android:textSize="@dimen/text_medium" />
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_row="3"
+                app:layout_row="4"
                 app:layout_column="2"
                 android:id="@+id/gearedForShifting"
-                app:layout_columnWeight="1"
                 android:text="Shifting"
-                android:textSize="@dimen/text_small"/>
+                android:textSize="@dimen/text_medium"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_row="5"
+                app:layout_column="0"
+                app:layout_columnSpan="3"
+                android:hint="Notes"
+                android:textSize="@dimen/text_medium"
+                android:layout_marginBottom="50dp"/>
 
         </android.support.v7.widget.GridLayout>
 
