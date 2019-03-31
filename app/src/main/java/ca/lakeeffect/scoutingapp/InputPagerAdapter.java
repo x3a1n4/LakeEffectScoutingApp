@@ -11,9 +11,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 public class InputPagerAdapter extends FragmentStatePagerAdapter {
 
-    final int PAGENUM = 6;
+    final int PAGENUM = 8;
 
     public DrivetrainPage drivetrainPage;
+    public CargoHatchPage cargoHatchPage;
     public PregamePage pregamePage;
     public FieldUIPage autoPage;
     public FieldUIPage teleopPage;
@@ -24,6 +25,7 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
     public InputPagerAdapter(FragmentManager fm) {
         super(fm);
         drivetrainPage = new DrivetrainPage();
+        cargoHatchPage = new CargoHatchPage();
         pregamePage = new PregamePage();
         autoPage = new FieldUIPage();
         teleopPage = new FieldUIPage();
@@ -39,12 +41,11 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
                 drivetrainPage = new DrivetrainPage();
                 return drivetrainPage;
             case 1:
-                autoPage = new FieldUIPage();
-                autoPage.autoPage = true;
-                return autoPage;
+                cargoHatchPage = new CargoHatchPage();
+                return cargoHatchPage;
             case 2:
-                teleopPage = new FieldUIPage();
-                return teleopPage;
+                cargoHatchPage = new CargoHatchPage();
+                return cargoHatchPage;
             case 3:
                 postgamePage = new PostgamePage();
                 return postgamePage;
@@ -54,6 +55,13 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
             case 5:
                 pregamePage = new PregamePage();
                 return pregamePage;
+            case 6:
+                autoPage = new FieldUIPage();
+                autoPage.autoPage = true;
+                return autoPage;
+            case 7:
+                teleopPage = new FieldUIPage();
+                return teleopPage;
         }
         return null;
     }
@@ -70,15 +78,19 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return "Drive Train";
             case 1:
-                return "Autonomous Period";
+                return "Cargo Mechanism";
             case 2:
-                return "TeleOp Period";
+                return "Hatch Mechanism";
             case 3:
                 return "Post-Game";
             case 4:
                 return "Qualitative";
             case 5:
                 return "Pre-Game";
+            case 6:
+                return "Autonomous Period";
+            case 7:
+                return "TeleOp Period";
         }
         return "";
     }
