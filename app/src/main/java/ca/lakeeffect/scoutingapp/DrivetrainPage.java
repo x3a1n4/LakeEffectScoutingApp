@@ -181,9 +181,7 @@ public class DrivetrainPage extends Fragment {
                 // Insert password input box at last third position again.
                 gridLayout.addView(passwordEditText, childCount - 2);
 
-                FROM file:///C:/Users/Xan/AppData/Local/Microsoft/Windows/INetCache/IE/I3LIY8HA/Android_Gridlayout_Example_Programmatically[1].mhtml
-                Should change that to the actual URL but I can do that later
-                Nope I can't find it
+                FROM https://www.dev2qa.com/android-gridlayout-example-programmatically/
                 */
             }
 
