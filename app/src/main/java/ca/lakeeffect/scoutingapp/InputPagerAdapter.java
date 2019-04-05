@@ -11,10 +11,13 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 public class InputPagerAdapter extends FragmentStatePagerAdapter {
 
-    final int PAGENUM = 8;
+    final int PAGENUM = 11;
 
     public DrivetrainPage drivetrainPage;
     public CargoHatchPage cargoHatchPage;
+    public SandstormPage sandstormPage;
+    public ClimbingPage climbingPage;
+    public StrategyPage strategyPage;
     public PregamePage pregamePage;
     public FieldUIPage autoPage;
     public FieldUIPage teleopPage;
@@ -26,6 +29,9 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
         super(fm);
         drivetrainPage = new DrivetrainPage();
         cargoHatchPage = new CargoHatchPage();
+        sandstormPage = new SandstormPage();
+        climbingPage = new ClimbingPage();
+        strategyPage = new StrategyPage();
         pregamePage = new PregamePage();
         autoPage = new FieldUIPage();
         teleopPage = new FieldUIPage();
@@ -47,14 +53,14 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
                 cargoHatchPage = new CargoHatchPage();
                 return cargoHatchPage;
             case 3:
-                postgamePage = new PostgamePage();
-                return postgamePage;
+                sandstormPage = new SandstormPage();
+                return sandstormPage;
             case 4:
-                qualitativePage = new QualitativePage();
-                return qualitativePage;
+                climbingPage = new ClimbingPage();
+                return climbingPage;
             case 5:
-                pregamePage = new PregamePage();
-                return pregamePage;
+                strategyPage = new StrategyPage();
+                return strategyPage;
             case 6:
                 autoPage = new FieldUIPage();
                 autoPage.autoPage = true;
@@ -62,6 +68,15 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
             case 7:
                 teleopPage = new FieldUIPage();
                 return teleopPage;
+            case 8:
+                postgamePage = new PostgamePage();
+                return postgamePage;
+            case 9:
+                qualitativePage = new QualitativePage();
+                return qualitativePage;
+            case 10:
+                pregamePage = new PregamePage();
+                return pregamePage;
         }
         return null;
     }
@@ -82,15 +97,21 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return "Hatch Mechanism";
             case 3:
-                return "Post-Game";
+                return "Sandstorm Period";
             case 4:
-                return "Qualitative";
+                return "Climbing";
             case 5:
-                return "Pre-Game";
+                return "Strategy";
             case 6:
                 return "Autonomous Period";
             case 7:
                 return "TeleOp Period";
+            case 8:
+                return "Post-Game";
+            case 9:
+                return "Qualitative";
+            case 10:
+                return "Pre-Game";
         }
         return "";
     }

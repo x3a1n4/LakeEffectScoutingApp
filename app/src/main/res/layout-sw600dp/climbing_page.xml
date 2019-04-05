@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id = "@+id/drivetrainPageLayout">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            app:rowCount="13"
+            app:columnCount="4"
+            app:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+
+            <!--Middle Platform-->
+            <TextView
+                android:text="Middle Platform:"
+                android:textSize="@dimen/text_small"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_row="0"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                android:textAlignment="center"
+                android:paddingVertical="10dp"
+                android:background="@drawable/rectangle"
+                />
+            <TextView
+                android:text="Side Preference:"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="1"
+                app:layout_column="0"
+                android:padding="10dp"
+                />
+
+            <CheckBox
+                android:text="Left"
+                android:id="@+id/leftSide"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="1"
+                app:layout_column="1"
+                app:layout_columnWeight="1"
+                android:paddingRight="10dp"
+                android:paddingVertical="10dp"
+                />
+
+            <CheckBox
+                android:text="Both"
+                android:id="@+id/bothSides"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="1"
+                app:layout_column="2"
+                app:layout_columnWeight="1"
+                android:paddingRight="10dp"
+                android:paddingVertical="10dp"
+                />
+
+            <CheckBox
+                android:text="Right"
+                android:id="@+id/rightSide"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="1"
+                app:layout_column="3"
+                app:layout_columnWeight="1"
+                android:paddingRight="10dp"
+                android:paddingVertical="10dp"
+                />
+
+            <TextView
+                android:text="Consistency (50%) :"
+                android:textSize="@dimen/text_small"
+                android:id="@+id/middlePlatformConsistency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="2"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                app:layout_gravity="center_horizontal"
+                android:paddingVertical="10dp"
+                />
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_row="3"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                android:min="0"
+                android:max="100"
+                android:progress="50"
+                android:id="@+id/middlePlatform"
+                />
+
+            <TextView
+                android:text="Can Carry:"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="4"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                app:layout_gravity="center_horizontal|center_vertical"
+                android:paddingTop="10dp"
+                />
+
+            <ca.lakeeffect.scoutingapp.Counter
+                android:id="@+id/middlePlatformCarry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="5"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                app:layout_gravity="center_horizontal|center_vertical"
+                android:paddingBottom="10dp">
+            </ca.lakeeffect.scoutingapp.Counter>
+
+            <!--High Platform-->
+            <TextView
+                android:text="High Platform:"
+                android:textSize="@dimen/text_small"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_row="6"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                android:textAlignment="center"
+                android:paddingVertical="10dp"
+                android:background="@drawable/rectangle"
+                />
+            <TextView
+                android:text="Consistency (50%) :"
+                android:textSize="@dimen/text_small"
+                android:id="@+id/highPlatformConsistency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="7"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                app:layout_gravity="center_horizontal"
+                android:paddingVertical="10dp"
+                />
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_row="8"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                android:min="0"
+                android:max="100"
+                android:progress="50"
+                android:id="@+id/highPlatform"
+                />
+
+            <TextView
+                android:text="Can Carry:"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="9"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                app:layout_gravity="center_horizontal|center_vertical"
+                android:paddingTop="10dp"
+                />
+
+            <ca.lakeeffect.scoutingapp.Counter
+                android:id="@+id/highPlatformCarry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="10"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                app:layout_gravity="center_horizontal|center_vertical"
+                android:paddingBottom="10dp">
+            </ca.lakeeffect.scoutingapp.Counter>
+
+            <TextView
+                android:text="Describe Climbing Mechanism:"
+                android:textSize="@dimen/text_small"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_row="11"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                android:textAlignment="center"
+                android:paddingVertical="10dp"
+                android:background="@drawable/rectangle"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Describe it"
+                android:textSize="@dimen/text_small"
+                app:layout_row="12"
+                app:layout_column="0"
+                app:layout_columnSpan="4"
+                />
+
+        </android.support.v7.widget.GridLayout>
+    </ScrollView>
+</android.support.percent.PercentRelativeLayout>

@@ -14,6 +14,7 @@
         <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< Updated upstream
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
@@ -21,6 +22,187 @@
             app:columnCount="3"
             app:orientation="vertical"
             android:layout_margin="10dp">
+=======
+            app:rowCount="10"
+            app:columnCount="3"
+            app:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+            <TextView
+                android:text="Sandstorm Drive:"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                
+                app:layout_row="0"
+                app:layout_column="0"
+                app:layout_columnSpan="2"
+                android:paddingVertical="10dp"
+                android:paddingRight="10dp"
+                />
+            <CheckBox
+                android:text="Auto"
+                android:id="@+id/autoSandstorm"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="1"
+                app:layout_column="0"
+                android:paddingRight="10dp"
+                />
+            <CheckBox
+                android:text="Drive"
+                android:id="@+id/driveSandstorm"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="1"
+                app:layout_column="1"
+                android:paddingRight="10dp"
+                />
+
+            <TextView
+                android:text="Prefered Start Platform:"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="2"
+                app:layout_column="0"
+                app:layout_columnSpan="2"
+                android:paddingVertical="10dp"
+                android:paddingRight="20dp"
+                />
+            <CheckBox
+                android:text="High"
+                android:id="@+id/highPlatformSandstorm"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="3"
+                app:layout_column="0"
+                android:paddingRight="10dp"
+                />
+            <CheckBox
+                android:text="Low"
+                android:id="@+id/lowPlatformSandstorm"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="3"
+                app:layout_column="1"
+                android:paddingRight="10dp"
+                />
+
+            <TextView
+                android:text="Prefered Preload:"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="4"
+                app:layout_column="0"
+                app:layout_columnSpan="2"
+                android:paddingVertical="10dp"
+                android:paddingRight="10dp"
+                />
+            <CheckBox
+                android:text="Cargo"
+                android:id="@+id/cargoPreloadSandstorm"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="5"
+                app:layout_column="0"
+                android:paddingRight="10dp"
+                />
+            <CheckBox
+                android:text="Hatch"
+                android:id="@+id/hatchPreloadSandstorm"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="5"
+                app:layout_column="1"
+                android:paddingRight="10dp"
+                />
+
+            <GridLayout
+                android:id="@+id/autoGrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:columnCount="4"
+                android:rowCount="2"
+                app:layout_column="2"
+                app:layout_columnSpan="1"
+                app:layout_row="0"
+                app:layout_rowSpan="6">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_columnSpan="2"
+                    android:padding="10dp"
+                    android:text="Autos:"
+                    android:textSize="@dimen/text_medium"
+                    />
+
+                <Button
+                    android:id="@+id/addAuto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:text="+"
+                    android:textSize="@dimen/text_medium" />
+            </GridLayout>
+
+            <TextView
+                android:text="What they prefer to do in sandstorm:"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="6"
+                app:layout_column="0"
+                app:layout_columnSpan="3"
+                android:paddingVertical="10dp"
+                app:layout_gravity="center_horizontal"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Describe it"
+                android:textSize="@dimen/text_small"
+                android:id="@+id/preferredSandstorm"
+                app:layout_row="7"
+                app:layout_column="0"
+                app:layout_columnSpan="3"
+                android:paddingHorizontal="10dp"
+                />
+            <TextView
+                android:text="Describe their vision system:"
+                android:textSize="@dimen/text_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_row="8"
+                app:layout_column="0"
+                app:layout_columnSpan="3"
+                android:paddingVertical="10dp"
+                app:layout_gravity="center_horizontal"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Describe it"
+                android:textSize="@dimen/text_small"
+                android:id="@+id/visionSystem"
+                app:layout_row="9"
+                app:layout_column="0"
+                app:layout_columnSpan="3"
+                android:paddingHorizontal="10dp"
+                />
+>>>>>>> Stashed changes
 
         </android.support.v7.widget.GridLayout>
     </ScrollView>
