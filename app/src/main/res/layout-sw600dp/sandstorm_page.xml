@@ -14,64 +14,62 @@
         <android.support.v7.widget.GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-<<<<<<< Updated upstream
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            app:rowCount="14"
+            app:rowCount="11"
             app:columnCount="3"
             app:orientation="vertical"
             android:layout_margin="10dp">
-=======
-            app:rowCount="10"
-            app:columnCount="3"
-            app:orientation="vertical"
-            android:layout_margin="10dp"
-            >
+
             <TextView
-                android:text="Sandstorm Drive:"
-                android:textSize="@dimen/text_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                
                 app:layout_row="0"
                 app:layout_column="0"
                 app:layout_columnSpan="2"
+                android:text="During sandstorm:"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_small"
                 android:paddingVertical="10dp"
                 android:paddingRight="10dp"
                 />
+
             <CheckBox
-                android:text="Auto"
-                android:id="@+id/autoSandstorm"
-                android:textSize="@dimen/text_small"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_row="1"
                 app:layout_column="0"
-                android:paddingRight="10dp"
-                />
-            <CheckBox
-                android:text="Drive"
-                android:id="@+id/driveSandstorm"
+                android:text="Auto"
                 android:textSize="@dimen/text_small"
+                android:id="@+id/autoSandstormButton"
+                app:layout_gravity="center_vertical"
+                />
+
+            <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_row="1"
                 app:layout_column="1"
-                android:paddingRight="10dp"
+                android:text="Drive"
+                android:textSize="@dimen/text_small"
+                android:id="@+id/driveSandstormButton"
+                app:layout_gravity="center_vertical"
                 />
 
             <TextView
                 android:text="Prefered Start Platform:"
                 android:textSize="@dimen/text_small"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_row="2"
                 app:layout_column="0"
                 app:layout_columnSpan="2"
                 android:paddingVertical="10dp"
-                android:paddingRight="20dp"
+                android:paddingRight="10dp"
                 />
+
             <CheckBox
                 android:text="High"
                 android:id="@+id/highPlatformSandstorm"
@@ -80,7 +78,7 @@
                 android:layout_height="wrap_content"
                 app:layout_row="3"
                 app:layout_column="0"
-                android:paddingRight="10dp"
+                app:layout_gravity="center_vertical"
                 />
             <CheckBox
                 android:text="Low"
@@ -90,12 +88,13 @@
                 android:layout_height="wrap_content"
                 app:layout_row="3"
                 app:layout_column="1"
-                android:paddingRight="10dp"
+                app:layout_gravity="center_vertical"
                 />
 
             <TextView
                 android:text="Prefered Preload:"
                 android:textSize="@dimen/text_small"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_row="4"
@@ -104,6 +103,7 @@
                 android:paddingVertical="10dp"
                 android:paddingRight="10dp"
                 />
+
             <CheckBox
                 android:text="Cargo"
                 android:id="@+id/cargoPreloadSandstorm"
@@ -112,8 +112,10 @@
                 android:layout_height="wrap_content"
                 app:layout_row="5"
                 app:layout_column="0"
+                app:layout_gravity="center_vertical"
                 android:paddingRight="10dp"
                 />
+
             <CheckBox
                 android:text="Hatch"
                 android:id="@+id/hatchPreloadSandstorm"
@@ -122,7 +124,7 @@
                 android:layout_height="wrap_content"
                 app:layout_row="5"
                 app:layout_column="1"
-                android:paddingRight="10dp"
+                app:layout_gravity="center_vertical"
                 />
 
             <GridLayout
@@ -145,8 +147,8 @@
                     android:layout_columnSpan="2"
                     android:padding="10dp"
                     android:text="Autos:"
-                    android:textSize="@dimen/text_medium"
-                    />
+                    android:textSize="@dimen/text_small"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/addAuto"
@@ -161,13 +163,14 @@
             <TextView
                 android:text="What they prefer to do in sandstorm:"
                 android:textSize="@dimen/text_small"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_row="6"
                 app:layout_column="0"
                 app:layout_columnSpan="3"
-                android:paddingVertical="10dp"
                 app:layout_gravity="center_horizontal"
+                android:paddingVertical="10dp"
                 />
             <EditText
                 android:layout_width="match_parent"
@@ -183,6 +186,7 @@
             <TextView
                 android:text="Describe their vision system:"
                 android:textSize="@dimen/text_small"
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_row="8"
@@ -201,8 +205,8 @@
                 app:layout_column="0"
                 app:layout_columnSpan="3"
                 android:paddingHorizontal="10dp"
+                android:layout_marginBottom="50dp"
                 />
->>>>>>> Stashed changes
 
         </android.support.v7.widget.GridLayout>
     </ScrollView>
