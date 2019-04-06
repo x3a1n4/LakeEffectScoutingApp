@@ -17,7 +17,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            app:rowCount="11"
+            app:rowCount="12"
             app:columnCount="3"
             app:orientation="vertical"
             android:layout_margin="10dp">
@@ -127,37 +127,42 @@
                 app:layout_gravity="center_vertical"
                 />
 
-            <GridLayout
-                android:id="@+id/autoGrid"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rectangle"
-                android:columnCount="4"
-                android:rowCount="2"
-                app:layout_column="2"
-                app:layout_columnSpan="1"
-                app:layout_row="0"
-                app:layout_rowSpan="6">
+                app:layout_row="6"
+                app:layout_column="0"
+                app:layout_columnSpan="2"
+                android:paddingVertical="10dp"
+                android:paddingRight="10dp"
+                android:text="Autos:"
+                android:textSize="@dimen/text_small"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_column="0"
-                    android:layout_columnSpan="2"
-                    android:padding="10dp"
-                    android:text="Autos:"
-                    android:textSize="@dimen/text_small"
-                    android:textStyle="bold" />
+            <GridLayout
+                android:id="@+id/autoGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle"
+                android:columnCount="2"
+                android:rowCount="1"
+                android:layout_margin="2dp"
+                app:layout_column="0"
+                app:layout_columnSpan="2"
+                app:layout_row="7"
+                app:layout_rowSpan="1">
 
                 <Button
                     android:id="@+id/addAuto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_row="1"
+                    android:layout_row="0"
                     android:layout_column="0"
+                    android:layout_columnSpan="2"
+                    android:layout_margin="5dp"
                     android:text="+"
-                    android:textSize="@dimen/text_medium" />
+                    android:textSize="@dimen/text_large"
+                    android:layout_gravity="center_horizontal"/>
             </GridLayout>
 
             <TextView
@@ -166,7 +171,7 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_row="6"
+                app:layout_row="8"
                 app:layout_column="0"
                 app:layout_columnSpan="3"
                 app:layout_gravity="center_horizontal"
@@ -178,7 +183,7 @@
                 android:hint="Describe it"
                 android:textSize="@dimen/text_small"
                 android:id="@+id/preferredSandstorm"
-                app:layout_row="7"
+                app:layout_row="9"
                 app:layout_column="0"
                 app:layout_columnSpan="3"
                 android:paddingHorizontal="10dp"
@@ -189,7 +194,7 @@
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_row="8"
+                app:layout_row="10"
                 app:layout_column="0"
                 app:layout_columnSpan="3"
                 android:paddingVertical="10dp"
@@ -201,7 +206,7 @@
                 android:hint="Describe it"
                 android:textSize="@dimen/text_small"
                 android:id="@+id/visionSystem"
-                app:layout_row="9"
+                app:layout_row="11"
                 app:layout_column="0"
                 app:layout_columnSpan="3"
                 android:paddingHorizontal="10dp"
