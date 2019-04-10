@@ -11,18 +11,13 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 public class InputPagerAdapter extends FragmentStatePagerAdapter {
 
-    final int PAGENUM = 11;
+    final int PAGENUM = 6;
 
     public DrivetrainPage drivetrainPage;
     public CargoHatchPage cargoHatchPage;
     public SandstormPage sandstormPage;
     public ClimbingPage climbingPage;
     public StrategyPage strategyPage;
-    public PregamePage pregamePage;
-    public FieldUIPage autoPage;
-    public FieldUIPage teleopPage;
-    public PostgamePage postgamePage;
-    public QualitativePage qualitativePage;
 
     //Instatiate pages
     public InputPagerAdapter(FragmentManager fm) {
@@ -32,11 +27,6 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
         sandstormPage = new SandstormPage();
         climbingPage = new ClimbingPage();
         strategyPage = new StrategyPage();
-        pregamePage = new PregamePage();
-        autoPage = new FieldUIPage();
-        teleopPage = new FieldUIPage();
-        postgamePage = new PostgamePage();
-        qualitativePage = new QualitativePage();
     }
     
     //More instatiation
@@ -61,22 +51,6 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
             case 5:
                 strategyPage = new StrategyPage();
                 return strategyPage;
-            case 6:
-                autoPage = new FieldUIPage();
-                autoPage.autoPage = true;
-                return autoPage;
-            case 7:
-                teleopPage = new FieldUIPage();
-                return teleopPage;
-            case 8:
-                postgamePage = new PostgamePage();
-                return postgamePage;
-            case 9:
-                qualitativePage = new QualitativePage();
-                return qualitativePage;
-            case 10:
-                pregamePage = new PregamePage();
-                return pregamePage;
         }
         return null;
     }
@@ -102,16 +76,6 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
                 return "Climbing";
             case 5:
                 return "Strategy";
-            case 6:
-                return "Autonomous Period";
-            case 7:
-                return "TeleOp Period";
-            case 8:
-                return "Post-Game";
-            case 9:
-                return "Qualitative";
-            case 10:
-                return "Pre-Game";
         }
         return "";
     }

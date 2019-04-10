@@ -207,90 +207,10 @@ public class MainActivity extends ListeningActitivty {
     StringBuilder data;
     StringBuilder labels;
 
-    public String getEventData(int page){
-        StringBuilder events = new StringBuilder();
-
-        ArrayList<Event> allEvents = pagerAdapter.autoPage.events;
-        if (page == 1) {
-            allEvents = pagerAdapter.teleopPage.events;
-        }
-
-        for(Event event : allEvents){
-            int location = event.location;
-
-            events.append(matchNumber + "," + event.eventType + "," + location + "," + event.timestamp + "," + event.metadata + "\n");
-        }
-
-        return Base64.encodeToString(events.toString().getBytes(Charset.forName("UTF-8")), Base64.DEFAULT);
-    }
-
     public String[] getData(boolean bypassChecks) {
         if (!bypassChecks) {
-            if (((RatingBar) pagerAdapter.qualitativePage.getView().findViewById(R.id.driveRating)).getRating() <= 0) {
-                runOnUiThread(new Thread() {
-                    public void run() {
-                        new Toast(MainActivity.this).makeText(MainActivity.this, "You didn't rate the drive ability!", Toast.LENGTH_LONG).show();
-                    }
-                });
-                return null;
-            }
-
-            if (((RatingBar) pagerAdapter.qualitativePage.getView().findViewById(R.id.intakeRating)).getRating() <= 0) {
-                runOnUiThread(new Thread() {
-                    public void run() {
-                        new Toast(MainActivity.this).makeText(MainActivity.this, "You didn't rate the intake ability!", Toast.LENGTH_LONG).show();
-                    }
-                });
-                return null;
-            }
-
-            //if the defence rating is visible and it is <= 0
-            if (((RatingBar) pagerAdapter.qualitativePage.getView().findViewById(R.id.defenceRating)).getRating() <= 0 && ((RatingBar) pagerAdapter.qualitativePage.getView().findViewById(R.id.defenceRating)).getVisibility() == View.VISIBLE) {
-                runOnUiThread(new Thread() {
-                    public void run() {
-                        new Toast(MainActivity.this).makeText(MainActivity.this, "You didn't rate the defence ability!", Toast.LENGTH_LONG).show();
-                    }
-                });
-                return null;
-            }
-
-            if (((Spinner) pagerAdapter.postgamePage.getView().findViewById(R.id.endgameClimbType)).getSelectedItem().toString().equals("Where did it climb?")) {
-                runOnUiThread(new Thread() {
-                    public void run() {
-                        new Toast(MainActivity.this).makeText(MainActivity.this, "You forgot to specify where it climbed!", Toast.LENGTH_LONG).show();
-                    }
-                });
-                return null;
-            }
-
-            //if the second spinner is visible and it is "Choose One"
-            if (((Spinner) pagerAdapter.postgamePage.getView().findViewById(R.id.endgameClimb)).getSelectedItem().toString().equals("Choose One") && ((Spinner) pagerAdapter.postgamePage.getView().findViewById(R.id.endgameClimb)).getVisibility() == View.VISIBLE) {
-                runOnUiThread(new Thread() {
-                    public void run() {
-                        new Toast(MainActivity.this).makeText(MainActivity.this, "You forgot to specify how it climbed!", Toast.LENGTH_LONG).show();
-                    }
-                });
-                return null;
-            }
-
-            //if the confidence rating is visible and it is <= 0
-            if (((RatingBar) pagerAdapter.postgamePage.getView().findViewById(R.id.dataConfidence)).getRating() <= 0) {
-                runOnUiThread(new Thread() {
-                    public void run() {
-                        new Toast(MainActivity.this).makeText(MainActivity.this, "You didn't rate the confidence in your data!", Toast.LENGTH_LONG).show();
-                    }
-                });
-                return null;
-            }
-
-            if (((Spinner) pagerAdapter.pregamePage.getView().findViewById(R.id.autoStartLocation)).getSelectedItem().toString().equals("Choose One")) {
-                runOnUiThread(new Thread() {
-                    public void run() {
-                        new Toast(MainActivity.this).makeText(MainActivity.this, "You forgot to specify where it started!", Toast.LENGTH_LONG).show();
-                    }
-                });
-                return null;
-            }
+            /*
+            Example
 
             if (((Spinner) pagerAdapter.pregamePage.getView().findViewById(R.id.autoStartPlatform)).getSelectedItem().toString().equals("Choose One")) {
                 runOnUiThread(new Thread() {
@@ -300,6 +220,11 @@ public class MainActivity extends ListeningActitivty {
                 });
                 return null;
             }
+            */
+
+
+            /*
+            Another example
 
             //check if the robot is starting with hatch or cargo
             if (!noStartingObject && !((CheckBox) pagerAdapter.pregamePage.getView().findViewById(R.id.startingObjectsHatch)).isChecked()
@@ -319,6 +244,7 @@ public class MainActivity extends ListeningActitivty {
                         .show();
                 return null;
             }
+            */
         }
 
         data = new StringBuilder();
@@ -336,28 +262,24 @@ public class MainActivity extends ListeningActitivty {
 
         PercentRelativeLayout layout;
 
-        //Pregame page
-        layout = pagerAdapter.pregamePage.getView().findViewById(R.id.preGamePageLayout);
+        //Drivetrain page
+        layout = pagerAdapter.drivetrainPage.getView().findViewById(R.id.preGamePageLayout);
         enterLayout(layout);
 
-        //tele field
-        String[] tele = pagerAdapter.teleopPage.getData();
-
-        labels.append(tele[0]);
-        data.append(tele[1]);
-
-        //auto field
-        String[] auto = pagerAdapter.autoPage.getData();
-
-        labels.append(auto[0]);
-        data.append(auto[1]);
-
-        //Postgame page
-        layout = pagerAdapter.postgamePage.getView().findViewById(R.id.postgamePageLayout);
+        //Cargo Hatch page
+        layout = pagerAdapter.cargoHatchPage.getView().findViewById(R.id.postgamePageLayout);
         enterLayout(layout);
 
-        //Qualitative Page
-        layout = pagerAdapter.qualitativePage.getView().findViewById(R.id.qualitativePageLayout);
+        //Sandstorm Page
+        layout = pagerAdapter.sandstormPage.getView().findViewById(R.id.qualitativePageLayout);
+        enterLayout(layout);
+
+        //Climb Page
+        layout = pagerAdapter.climbingPage.getView().findViewById(R.id.qualitativePageLayout);
+        enterLayout(layout);
+
+        //Strategy Page
+        layout = pagerAdapter.strategyPage.getView().findViewById(R.id.qualitativePageLayout);
         enterLayout(layout);
 
         labels.append("Scout Name,");
@@ -501,7 +423,6 @@ public class MainActivity extends ListeningActitivty {
             }
 
             //save auto events
-            String autoEvents = getEventData(0);
             File autoEventsFile = new File(sdCard.getPath() + "/#ScoutingData/AutoEventData/" + robotNum + ".csv");
 
             autoEventsFile.getParentFile().mkdirs();
@@ -513,12 +434,8 @@ public class MainActivity extends ListeningActitivty {
 
             OutputStreamWriter autoEventsOut = new OutputStreamWriter(autoEventsF);
 
-            autoEventsOut.append(new String(Base64.decode(autoEvents, Base64.DEFAULT), Charset.forName("UTF-8")));
-            autoEventsOut.close();
             autoEventsF.close();
 
-            //save tele op events
-            String teleOpEvents = getEventData(1);
             File teleOpEventsFile = new File(sdCard.getPath() + "/#ScoutingData/EventData/" + robotNum + ".csv");
 
             teleOpEventsFile.getParentFile().mkdirs();
@@ -530,8 +447,6 @@ public class MainActivity extends ListeningActitivty {
 
             OutputStreamWriter teleOpEventsOut = new OutputStreamWriter(teleOpEventsF);
 
-            teleOpEventsOut.append(new String(Base64.decode(teleOpEvents, Base64.DEFAULT), Charset.forName("UTF-8")));
-            teleOpEventsOut.close();
             teleOpEventsF.close();
 
             //save to file
@@ -539,16 +454,8 @@ public class MainActivity extends ListeningActitivty {
             out.append(new String(Base64.decode(data[0], Base64.DEFAULT), Charset.forName("UTF-8")));
 
             String fulldata = "";
-            if (!teleOpEvents.equals("")) {
-                if (autoEvents.equals("")) {
-                    autoEvents = Base64.encodeToString("nodata".getBytes(Charset.forName("UTF-8")), Base64.DEFAULT);
-                }
-                fulldata = robotNum + ":" + data[0] + ":" + autoEvents + ":" + teleOpEvents;
-            } else if(!autoEvents.equals("")) {
-                fulldata = robotNum + ":" + data[0] + ":" + autoEvents;
-            }else {
-                fulldata = robotNum + ":" + data[0];
-            }
+            fulldata = robotNum + ":" + data[0];
+
 
             //encode to base64
             fulldata = Base64.encodeToString(fulldata.getBytes(Charset.forName("UTF-8")), Base64.DEFAULT);
@@ -710,19 +617,24 @@ public class MainActivity extends ListeningActitivty {
 
         PercentRelativeLayout layout;
 
-        //Auto page
-        layout = pagerAdapter.pregamePage.getView().findViewById(R.id.preGamePageLayout);
+        //Drivetrain page
+        layout = pagerAdapter.drivetrainPage.getView().findViewById(R.id.preGamePageLayout);
         clearData(layout);
 
-        //Tele page
-        pagerAdapter.teleopPage.reset();
-
-        //Endgame page
-        layout = pagerAdapter.postgamePage.getView().findViewById(R.id.postgamePageLayout);
+        //Cargo hatch page
+        layout = pagerAdapter.cargoHatchPage.getView().findViewById(R.id.preGamePageLayout);
         clearData(layout);
 
-        //Qualitative page
-        layout = pagerAdapter.qualitativePage.getView().findViewById(R.id.qualitativePageLayout);
+        //Sandstorm page
+        layout = pagerAdapter.sandstormPage.getView().findViewById(R.id.preGamePageLayout);
+        clearData(layout);
+
+        //Climb page
+        layout = pagerAdapter.climbingPage.getView().findViewById(R.id.postgamePageLayout);
+        clearData(layout);
+
+        //Strategy page
+        layout = pagerAdapter.strategyPage.getView().findViewById(R.id.qualitativePageLayout);
         clearData(layout);
 
         noStartingObject = false;
@@ -1080,10 +992,6 @@ public class MainActivity extends ListeningActitivty {
 
             alliance = robotAlliance.getSelectedItemPosition() == 2;
             side = viewingSide.getSelectedItemPosition() == 2;
-
-            //adjust the field image according to selection
-            pagerAdapter.autoPage.field.updateField(this, side);
-            pagerAdapter.teleopPage.field.updateField(this, side);
 
             SharedPreferences prefs = getSharedPreferences("userID", MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
