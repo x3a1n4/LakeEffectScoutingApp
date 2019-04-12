@@ -1,4 +1,4 @@
-package ca.lakeeffect.scoutingapp;
+package ca.lakeeffect.pitscoutingapp;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothServerSocket;
