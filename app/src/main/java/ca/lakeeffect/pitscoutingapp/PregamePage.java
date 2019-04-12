@@ -1,4 +1,4 @@
-package ca.lakeeffect.scoutingapp;
+package ca.lakeeffect.pitscoutingapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

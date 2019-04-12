@@ -1,4 +1,4 @@
-package ca.lakeeffect.scoutingapp;
+package ca.lakeeffect.pitscoutingapp;
 
 import android.app.Activity;
 import android.content.Context;
