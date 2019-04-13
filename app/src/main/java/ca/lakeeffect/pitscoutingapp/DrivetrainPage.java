@@ -248,7 +248,7 @@ public class DrivetrainPage extends Fragment {
         List<String> motors = new ArrayList<>();
         for(int i = 0; i < motorTextViews.size(); i++){
             if(motorTextViews.get(i).getText() == "Bee"){
-                motors.add(motorEditTexts.get(i).getText().toString());
+                motors.add(MainActivity.clean(motorEditTexts.get(i).getText().toString()));
             }else{
                 motors.add(motorTextViews.get(i).getText().toString());
             }

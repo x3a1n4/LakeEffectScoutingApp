@@ -125,7 +125,7 @@ public class SandstormPage extends Fragment {
     public static List<String> getAutos(){
         List<String> output = new ArrayList<>();
         for (EditText auto: autos) {
-            output.add(auto.getText().toString());
+            output.add(MainActivity.clean(auto.getText().toString()));
         }
         return output;
     }

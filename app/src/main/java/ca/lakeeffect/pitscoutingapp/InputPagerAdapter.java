@@ -14,7 +14,8 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
     final int PAGENUM = 6;
 
     public DrivetrainPage drivetrainPage;
-    public CargoHatchPage cargoHatchPage;
+    public CargoHatchPage cargoPage;
+    public CargoHatchPage hatchPage;
     public SandstormPage sandstormPage;
     public ClimbingPage climbingPage;
     public StrategyPage strategyPage;
@@ -23,7 +24,8 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
     public InputPagerAdapter(FragmentManager fm) {
         super(fm);
         drivetrainPage = new DrivetrainPage();
-        cargoHatchPage = new CargoHatchPage();
+        cargoPage = new CargoHatchPage();
+        hatchPage = new CargoHatchPage();
         sandstormPage = new SandstormPage();
         climbingPage = new ClimbingPage();
         strategyPage = new StrategyPage();
@@ -37,11 +39,11 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
                 drivetrainPage = new DrivetrainPage();
                 return drivetrainPage;
             case 1:
-                cargoHatchPage = new CargoHatchPage();
-                return cargoHatchPage;
+                cargoPage = new CargoHatchPage();
+                return cargoPage;
             case 2:
-                cargoHatchPage = new CargoHatchPage();
-                return cargoHatchPage;
+                hatchPage = new CargoHatchPage();
+                return hatchPage;
             case 3:
                 sandstormPage = new SandstormPage();
                 return sandstormPage;

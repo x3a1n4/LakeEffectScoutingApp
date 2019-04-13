@@ -208,6 +208,18 @@ public class MainActivity extends ListeningActitivty {
     StringBuilder data;
     StringBuilder labels;
 
+    public void addItems(StringBuilder input, List<String> append){
+        for(String string : append){
+            input.append(string + ",");
+        }
+    }
+
+    public void addIntItems(StringBuilder input, List<Integer> ints){
+        for(Integer integer : ints){
+            input.append(integer + ",");
+        }
+    }
+
     public String[] getData(boolean bypassChecks) {
         if (!bypassChecks) {
             /*
@@ -267,21 +279,25 @@ public class MainActivity extends ListeningActitivty {
         layout = pagerAdapter.drivetrainPage.getView().findViewById(R.id.drivetrainPageLayout);
         enterLayout(layout);
 
-        labels.append(DrivetrainPage.getMotorNames());
-        data.append(DrivetrainPage.getMotors());
+        addItems(labels, DrivetrainPage.getMotorNames());
+        addIntItems(data, DrivetrainPage.getMotors());
 
-        //Cargo Hatch page
-        layout = pagerAdapter.cargoHatchPage.getView().findViewById(R.id.cargoHatchPageLayout);
+        //Cargo page
+        layout = pagerAdapter.cargoPage.getView().findViewById(R.id.cargoHatchPageLayout);
+        enterLayout(layout);
+
+        //Hatch page
+        layout = pagerAdapter.hatchPage.getView().findViewById(R.id.cargoHatchPageLayout);
         enterLayout(layout);
 
         //Sandstorm Page
         layout = pagerAdapter.sandstormPage.getView().findViewById(R.id.sandstormPageLayout);
         enterLayout(layout);
 
-        for(int i = 0; i<SandstormPage.getAutos().size(); i++){
-            labels.append("Auto " + i);
+        for(int i = 1; i<SandstormPage.getAutos().size() + 1; i++){
+            labels.append("Auto " + i + ",");
         }
-        data.append(SandstormPage.getAutos());
+        addItems(data, SandstormPage.getAutos());
 
         //Climb Page
         layout = pagerAdapter.climbingPage.getView().findViewById(R.id.climbingPageLayout);
@@ -318,11 +334,9 @@ public class MainActivity extends ListeningActitivty {
         //Iterate over all child layouts
         for (int i = 0; i < top.getChildCount(); i++) {
             View v = top.getChildAt(i);
-            if(v instanceof ViewGroup || getName(v) != "NULL"){
+            if(!getName(v).equals("NULL")){
                 if (v instanceof EditText) {
-                    data.append(((EditText) v).getText().toString().replace("|", "||").replace(",", "|c")
-                            .replace("\n", "|n").replace("\"", "|q").replace(":", ";")
-                            .replace("{", "|ob").replace("}", "|cb") + ",");
+                    data.append(clean(((EditText) v).getText().toString()) + ",");
                     labels.append(getName(v) + ",");
                 }
                 if (v instanceof CheckBox) {
@@ -351,12 +365,11 @@ public class MainActivity extends ListeningActitivty {
                     data.append(((RadioButton) v).isChecked() + ",");
                     labels.append(getName(v) + ",");
                 }
-                //If the child is a layout, enter it
-                else if (v instanceof ViewGroup) {
-                    enterLayout((ViewGroup) v);
-                }
             }
-
+            //If the child is a layout, enter it
+            else if (v instanceof ViewGroup) {
+                enterLayout((ViewGroup) v);
+            }
         }
     }
 
@@ -600,7 +613,11 @@ public class MainActivity extends ListeningActitivty {
         clearData(layout);
 
         //Cargo hatch page
-        layout = pagerAdapter.cargoHatchPage.getView().findViewById(R.id.cargoHatchPageLayout);
+        layout = pagerAdapter.cargoPage.getView().findViewById(R.id.cargoHatchPageLayout);
+        clearData(layout);
+
+        //Cargo hatch page
+        layout = pagerAdapter.hatchPage.getView().findViewById(R.id.cargoHatchPageLayout);
         clearData(layout);
 
         //Sandstorm page
@@ -1081,6 +1098,12 @@ public class MainActivity extends ListeningActitivty {
             }
         }
         return false;
+    }
+
+    public static String clean(String input){
+        return input.replace("|", "||").replace(",", "|c")
+                .replace("\n", "|n").replace("\"", "|q").replace(":", ";")
+                .replace("{", "|ob").replace("}", "|cb");
     }
 
     //From https://stackoverflow.com/questions/32127374/android-how-to-get-all-items-in-a-spinner
