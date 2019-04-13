@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id = "@+id/drivetrainPageLayout">
+    android:id = "@+id/climbingPageLayout">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -218,6 +218,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Describe it"
+                android:id="@+id/climbingMechanism"
                 app:layout_row="13"
                 app:layout_column="0"
                 app:layout_columnSpan="2"

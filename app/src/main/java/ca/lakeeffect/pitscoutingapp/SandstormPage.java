@@ -21,6 +21,7 @@ import android.widget.GridLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,6 +29,8 @@ import java.util.List;
  * Created by Ajay on 9/25/2016.
  */
 public class SandstormPage extends Fragment {
+
+    static List<EditText> autos = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,6 +105,9 @@ public class SandstormPage extends Fragment {
                 params.setGravity(Gravity.FILL_HORIZONTAL);
                 autoDesc.setLayoutParams(params);
 
+                //add to list
+                autos.add(autoDesc);
+
                 childCount = autoGrid.getChildCount();
                 autoGrid.addView(autoDesc, childCount);
 
@@ -114,5 +120,13 @@ public class SandstormPage extends Fragment {
 
         return view;
 
+    }
+
+    public static List<String> getAutos(){
+        List<String> output = new ArrayList<>();
+        for (EditText auto: autos) {
+            output.add(auto.getText().toString());
+        }
+        return output;
     }
 }

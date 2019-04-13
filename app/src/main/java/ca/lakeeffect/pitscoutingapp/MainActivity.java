@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
@@ -263,23 +264,31 @@ public class MainActivity extends ListeningActitivty {
         PercentRelativeLayout layout;
 
         //Drivetrain page
-        layout = pagerAdapter.drivetrainPage.getView().findViewById(R.id.preGamePageLayout);
+        layout = pagerAdapter.drivetrainPage.getView().findViewById(R.id.drivetrainPageLayout);
         enterLayout(layout);
 
+        labels.append(DrivetrainPage.getMotorNames());
+        data.append(DrivetrainPage.getMotors());
+
         //Cargo Hatch page
-        layout = pagerAdapter.cargoHatchPage.getView().findViewById(R.id.postgamePageLayout);
+        layout = pagerAdapter.cargoHatchPage.getView().findViewById(R.id.cargoHatchPageLayout);
         enterLayout(layout);
 
         //Sandstorm Page
-        layout = pagerAdapter.sandstormPage.getView().findViewById(R.id.qualitativePageLayout);
+        layout = pagerAdapter.sandstormPage.getView().findViewById(R.id.sandstormPageLayout);
         enterLayout(layout);
 
+        for(int i = 0; i<SandstormPage.getAutos().size(); i++){
+            labels.append("Auto " + i);
+        }
+        data.append(SandstormPage.getAutos());
+
         //Climb Page
-        layout = pagerAdapter.climbingPage.getView().findViewById(R.id.qualitativePageLayout);
+        layout = pagerAdapter.climbingPage.getView().findViewById(R.id.climbingPageLayout);
         enterLayout(layout);
 
         //Strategy Page
-        layout = pagerAdapter.strategyPage.getView().findViewById(R.id.qualitativePageLayout);
+        layout = pagerAdapter.strategyPage.getView().findViewById(R.id.strategyPageLayout);
         enterLayout(layout);
 
         labels.append("Scout Name,");
@@ -309,76 +318,45 @@ public class MainActivity extends ListeningActitivty {
         //Iterate over all child layouts
         for (int i = 0; i < top.getChildCount(); i++) {
             View v = top.getChildAt(i);
-            if (v instanceof EditText) {
-                data.append(((EditText) v).getText().toString().replace("|", "||").replace(",", "|c")
-                        .replace("\n", "|n").replace("\"", "|q").replace(":", ";")
-                        .replace("{", "|ob").replace("}", "|cb") + ",");
-                labels.append(getName(v) + ",");
-            }
-            if (v instanceof CheckBox) {
-                data.append(((CheckBox) v).isChecked() + ",");
-                labels.append(getName(v) + ",");
-            }
-            if (v instanceof Counter) {
-                data.append(((Counter) v).count + ",");
-                labels.append(getName(v) + ",");
-            }
-            if (v instanceof HigherCounter) {
-                data.append(((HigherCounter) v).count + ",");
-                labels.append(getName(v) + ",");
-            }
-            if (v instanceof RatingBar) {
-                data.append(((RatingBar) v).getRating() + ",");
-//                    System.out.println(getName(v));
-                labels.append(getName(v) + ",");
-            }
-            if (v instanceof Spinner) {
-                data.append(((Spinner) v).getSelectedItem().toString() + ",");
-                System.out.println(((Spinner) v).getSelectedItem().toString() + ",");
-                labels.append(getName(v) + ",");
-            }
-            if (v instanceof RadioGroup) {
-                String selected = getName(v.findViewById(((RadioGroup) v).getCheckedRadioButtonId()));
-                //Game-specific cases
-                switch(selected){
-                    //Baseline radiogroup
-                    case "Baseline Success":
-                        data.append("True,");
-                        break;
-                    case "Baseline Failed":
-                        data.append("False,");
-                        break;
-                    //Power cube radiogroup
-                    case "First Auto Cube Success":
-                        data.append("True,");
-                        break;
-                    case "First Auto Cube Failed":
-                        data.append("False,");
-                        break;
-                    case "Second Auto Cube Success":
-                        data.append("True,");
-                        break;
-                    case "Second Auto Cube Failed":
-                        data.append("False,");
-                        break;
-                    case "Third Auto Cube Success":
-                        data.append("True,");
-                        break;
-                    case "Third Auto Cube Failed":
-                        data.append("False,");
-                        break;
-                    //Radio button ID will be result output in data
-                    default:
-                         data.append(selected + ",");
-                        break;
+            if(v instanceof ViewGroup || getName(v) != "NULL"){
+                if (v instanceof EditText) {
+                    data.append(((EditText) v).getText().toString().replace("|", "||").replace(",", "|c")
+                            .replace("\n", "|n").replace("\"", "|q").replace(":", ";")
+                            .replace("{", "|ob").replace("}", "|cb") + ",");
+                    labels.append(getName(v) + ",");
                 }
-//                data.append(((RadioGroup) v).getCheckedRadioButtonId() + ",");
-                labels.append(getName(v) + ",");
+                if (v instanceof CheckBox) {
+                    data.append(((CheckBox) v).isChecked() + ",");
+                    labels.append(getName(v) + ",");
+                }
+                if (v instanceof Counter) {
+                    data.append(((Counter) v).count + ",");
+                    labels.append(getName(v) + ",");
+                }
+                if (v instanceof HigherCounter) {
+                    data.append(((HigherCounter) v).count + ",");
+                    labels.append(getName(v) + ",");
+                }
+                if (v instanceof SeekBar) {
+                    data.append(((SeekBar) v).getProgress() + ",");
+//                    System.out.println(getName(v));
+                    labels.append(getName(v) + ",");
+                }
+                if (v instanceof Spinner) {
+                    data.append(((Spinner) v).getSelectedItem().toString() + ",");
+                    System.out.println(((Spinner) v).getSelectedItem().toString() + ",");
+                    labels.append(getName(v) + ",");
+                }
+                if (v instanceof RadioButton) {
+                    data.append(((RadioButton) v).isChecked() + ",");
+                    labels.append(getName(v) + ",");
+                }
+                //If the child is a layout, enter it
+                else if (v instanceof ViewGroup) {
+                    enterLayout((ViewGroup) v);
+                }
             }
-            //If the child is a layout, enter it
-            else if (v instanceof ViewGroup) {
-                enterLayout((ViewGroup) v);
-            }
+
         }
     }
 
@@ -618,23 +596,23 @@ public class MainActivity extends ListeningActitivty {
         PercentRelativeLayout layout;
 
         //Drivetrain page
-        layout = pagerAdapter.drivetrainPage.getView().findViewById(R.id.preGamePageLayout);
+        layout = pagerAdapter.drivetrainPage.getView().findViewById(R.id.drivetrainPageLayout);
         clearData(layout);
 
         //Cargo hatch page
-        layout = pagerAdapter.cargoHatchPage.getView().findViewById(R.id.preGamePageLayout);
+        layout = pagerAdapter.cargoHatchPage.getView().findViewById(R.id.cargoHatchPageLayout);
         clearData(layout);
 
         //Sandstorm page
-        layout = pagerAdapter.sandstormPage.getView().findViewById(R.id.preGamePageLayout);
+        layout = pagerAdapter.sandstormPage.getView().findViewById(R.id.sandstormPageLayout);
         clearData(layout);
 
         //Climb page
-        layout = pagerAdapter.climbingPage.getView().findViewById(R.id.postgamePageLayout);
+        layout = pagerAdapter.climbingPage.getView().findViewById(R.id.climbingPageLayout);
         clearData(layout);
 
         //Strategy page
-        layout = pagerAdapter.strategyPage.getView().findViewById(R.id.qualitativePageLayout);
+        layout = pagerAdapter.strategyPage.getView().findViewById(R.id.strategyPageLayout);
         clearData(layout);
 
         noStartingObject = false;
@@ -655,6 +633,10 @@ public class MainActivity extends ListeningActitivty {
             }
             if (v instanceof RatingBar) {
                 ((RatingBar) v).setRating(0);
+            }
+            if (v instanceof SeekBar) {
+                SeekBar seekBar = ((SeekBar) v);
+                seekBar.setProgress(seekBar.getMax()/2);
             }
             if (v instanceof Spinner) {
                 ((Spinner) v).setSelection(0);

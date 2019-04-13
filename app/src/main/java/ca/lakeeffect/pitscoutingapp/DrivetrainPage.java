@@ -32,6 +32,10 @@ import java.util.List;
  */
 public class DrivetrainPage extends Fragment {
 
+    static List<TextView> motorTextViews = new ArrayList<>();
+    static List<EditText> motorEditTexts = new ArrayList<>();
+    static List<Counter> motorAmounts = new ArrayList<>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,12 +85,19 @@ public class DrivetrainPage extends Fragment {
                     //find how many children the gridlayout has
                     int childCount = drivetrainPageGrid.getChildCount();
 
-                    //if it's the last item in the spinner
+                    //if it's the last item in the spinner or the other item
                     if(pos == MainActivity.retrieveAllItems(motorChooser).size() - 1){
                         // Create an editText view component.
                         EditText editText = new EditText(context);
                         editText.setHint("Motor type");
                         editText.setTextSize(getResources().getDimension(R.dimen.text_small) / 3); //TODO: find out why I need to divide by 3
+
+                        //add it to the lists
+                        motorEditTexts.add(editText);
+                        //and keep the lists even
+                        TextView filler = new TextView(context);
+                        filler.setText("Bee");
+                        motorTextViews.add(filler);
 
                         //Add it at the end
                         drivetrainPageGrid.addView(editText, childCount);
@@ -117,6 +128,11 @@ public class DrivetrainPage extends Fragment {
                         System.out.println(getResources().getDimension(R.dimen.text_small));
                         System.out.println("Text size");
 
+                        //add it to the lists
+                        motorEditTexts.add(new EditText(context));
+                        //and keep them even
+                        motorTextViews.add(textView);
+
                         //Add it at the end
                         drivetrainPageGrid.addView(textView, childCount);
                     }
@@ -126,7 +142,10 @@ public class DrivetrainPage extends Fragment {
                     //Add the counter
                     Counter counter = new Counter(context, null);
                     counter.max = 999999;
-                    View newCounter = LayoutInflater.from(context).inflate(R.layout.counter, null);
+
+                    //add to list of counters
+                    motorAmounts.add(counter);
+
                     drivetrainPageGrid.addView(counter, childCount);
                     drivetrainPageGrid.invalidate();
                 }
@@ -215,5 +234,25 @@ public class DrivetrainPage extends Fragment {
 
         return view;
 
+    }
+
+    public static List<Integer> getMotors(){
+        List<Integer> motors = new ArrayList<>();
+        for (Counter counter: motorAmounts) {
+            motors.add(counter.count);
+        }
+        return motors;
+    }
+
+    public static List<String> getMotorNames(){
+        List<String> motors = new ArrayList<>();
+        for(int i = 0; i < motorTextViews.size(); i++){
+            if(motorTextViews.get(i).getText() == "Bee"){
+                motors.add(motorEditTexts.get(i).getText().toString());
+            }else{
+                motors.add(motorTextViews.get(i).getText().toString());
+            }
+        }
+        return motors;
     }
 }
