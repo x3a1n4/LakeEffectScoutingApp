@@ -2,30 +2,50 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <GridLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dialogLinearLayout">
+        android:id="@+id/dialogGridLayout"
+        android:rowCount="5"
+        android:columnCount="2">
 
         <EditText
             android:imeOptions="flagNoExtractUi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:enabled="false"
             android:ems="10"
             android:id="@+id/robotNumber"
-            android:hint="Robot Number" />
+            android:hint="Robot Number"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_columnSpan="2"/>
 
         <EditText
-            android:imeOptions="flagNoExtractUi"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/robotWeight"
+            android:hint="Robot Weight"
             android:inputType="number"
-            android:ems="10"
-            android:id="@+id/matchNumber"
-            android:hint="Match Number" />
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_gravity="fill_horizontal"
+            android:layout_columnWeight="5"
+            />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:textSize = "@dimen/text_small"
+            android:layout_gravity="end|fill_vertical"
+            android:id="@+id/units"
+            android:layout_columnWeight="1"
+            android:padding="10dp"
+            />
 
         <Spinner
             android:layout_width="match_parent"
@@ -33,26 +53,35 @@
             android:id="@+id/userID"
             android:spinnerMode="dropdown"
             android:textSize = "@dimen/text_small"
-            android:layout_gravity="top"/>
+            android:layout_gravity="top"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_columnSpan="2"/>
 
-        <Spinner
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/robotAlliance"
-            android:spinnerMode="dropdown"
-            android:enabled="false"
-            android:clickable="false"
-            android:textSize = "@dimen/text_small"
-            android:layout_gravity="top"/>
+            android:background="@drawable/rectangle"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:layout_columnSpan="2"
+            android:id="@+id/photoGrid"
+            android:rowCount="2"
+            android:columnCount="2"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Photo"
+                android:id="@+id/addPhoto"
+                android:textSize="@dimen/text_small"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:layout_columnSpan="2"
+                android:layout_gravity="center_horizontal"
+                />
+        </GridLayout>
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/viewingSide"
-            android:spinnerMode="dropdown"
-            android:textSize = "@dimen/text_small"
-            android:layout_gravity="top"/>
-
-    </LinearLayout>
+    </GridLayout>
 
 </ScrollView>

@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Round: XX  Robot: XXXX"
+                android:text="Robot: XXXX"
                 android:id="@+id/robotNum"
                 android:layout_weight="1"
                 android:textSize="@dimen/text_small"/>
@@ -45,31 +45,6 @@
                     android:id="@+id/deviceName"
                     android:textStyle="bold"
                     android:layout_toRightOf="@id/deviceNameTextView"
-                    android:textSize="@dimen/text_small"/>
-            </RelativeLayout>
-        </TableRow>
-
-        <TableRow>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id = "@+id/matchesLeftLayout"
-                android:layout_centerHorizontal="true"
-                android:layout_weight="1">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Matches Until Off: "
-                    android:id="@+id/matchesLeftTextView"
-                    android:textSize="@dimen/text_small"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="XXXXXXX"
-                    android:id="@+id/matchesLeft"
-                    android:textStyle="bold"
-                    android:layout_toRightOf="@id/matchesLeftTextView"
                     android:textSize="@dimen/text_small"/>
             </RelativeLayout>
         </TableRow>

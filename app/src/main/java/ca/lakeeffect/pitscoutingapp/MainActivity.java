@@ -33,6 +33,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -56,26 +57,17 @@ import java.util.List;
 import java.util.UUID;
 
 public class MainActivity extends ListeningActitivty {
-
-    List<Counter> counters = new ArrayList<>();
-    List<CheckBox> checkboxes = new ArrayList<>();
-    List<RadioGroup> radiogroups = new ArrayList<>();
-    List<Button> buttons = new ArrayList<>();
-    List<SeekBar> seekbars = new ArrayList<>();
-
-    TextView timer;
     TextView robotNumText; //robotnum and matchNumber
 
     int robotNum = 2708;
+    int robotWeight;
+    String robotUnits;
 
     //only used if the schedule is being overridden
     String scoutName = "";
     //view that contains the scout name if the schedule is overridden
     EditText overriddenScoutName;
 
-    //the field data
-    public static boolean alliance; //red is false, true is blue
-    public static boolean side; //red on left is false, blue on left is true
 
     InputPagerAdapter pagerAdapter;
     ViewPager viewPager;
@@ -127,9 +119,6 @@ public class MainActivity extends ListeningActitivty {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //setup matches left text
-        matchesLeftText = findViewById(R.id.matchesLeft);
-
         //call alert (asking scout name and robot number)
         alert(false);
 
@@ -142,7 +131,6 @@ public class MainActivity extends ListeningActitivty {
         //set pending messages number on ui
         ((TextView) findViewById(R.id.numberOfPendingMessagesLayout).findViewById(R.id.numberOfPendingMessages)).setText(unsentData.size() + "");
 
-
         //setup scrolling viewpager
         viewPager = findViewById(R.id.scrollingview);
         pagerAdapter = new InputPagerAdapter(getSupportFragmentManager());
@@ -151,7 +139,7 @@ public class MainActivity extends ListeningActitivty {
 
         robotNumText = findViewById(R.id.robotNum);
 
-        robotNumText.setText("Round: " + matchNumber + "  Robot: " + robotNum);
+        robotNumText.setText("Robot: " + robotNum);
 
         loadSchedule();
 
@@ -263,15 +251,19 @@ public class MainActivity extends ListeningActitivty {
         data = new StringBuilder();
         labels = new StringBuilder();
 
-        //General Info
-        data.append(matchNumber + ",");
-        labels.append("Match,");
+        data.append(robotNum + ",");
+        labels.append("Robot,");
 
-        labels.append("Date and Time Of Match,");
+        labels.append("Date and Time,");
         DateFormat dateFormat = new SimpleDateFormat("dd HH;mm;ss");
         Date date = new Date();
         data.append(dateFormat.format(date) + ",");
 
+        labels.append("Weight,");
+        data.append(robotWeight + ",");
+
+        labels.append("Units,");
+        data.append(robotUnits + ",");
 
         PercentRelativeLayout layout;
 
@@ -412,33 +404,6 @@ public class MainActivity extends ListeningActitivty {
             if (data == null) {
                 return false;
             }
-
-            //save auto events
-            File autoEventsFile = new File(sdCard.getPath() + "/#ScoutingData/AutoEventData/" + robotNum + ".csv");
-
-            autoEventsFile.getParentFile().mkdirs();
-            if (!autoEventsFile.exists()) {
-                autoEventsFile.createNewFile();
-            }
-
-            FileOutputStream autoEventsF = new FileOutputStream(autoEventsFile, true);
-
-            OutputStreamWriter autoEventsOut = new OutputStreamWriter(autoEventsF);
-
-            autoEventsF.close();
-
-            File teleOpEventsFile = new File(sdCard.getPath() + "/#ScoutingData/EventData/" + robotNum + ".csv");
-
-            teleOpEventsFile.getParentFile().mkdirs();
-            if (!teleOpEventsFile.exists()) {
-                teleOpEventsFile.createNewFile();
-            }
-
-            FileOutputStream teleOpEventsF = new FileOutputStream(teleOpEventsFile, true);
-
-            OutputStreamWriter teleOpEventsOut = new OutputStreamWriter(teleOpEventsF);
-
-            teleOpEventsF.close();
 
             //save to file
             if (newfile) out.append(new String(Base64.decode(data[1], Base64.DEFAULT), Charset.forName("UTF-8")));
@@ -682,18 +647,14 @@ public class MainActivity extends ListeningActitivty {
                 final int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
                 //setup spinners (Drop downs)
-                final LinearLayout linearLayout = ((AlertDialog) dialog).findViewById(R.id.dialogLinearLayout);
+                final GridLayout gridLayout = ((AlertDialog) dialog).findViewById(R.id.dialogGridLayout);
 
-                final Spinner robotAlliance = linearLayout.findViewById(R.id.robotAlliance);
-
-                ArrayAdapter<CharSequence> robotAllianceAdapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.alliances, R.layout.spinner);
-                robotAlliance.setAdapter(robotAllianceAdapter);
-
-                //make robot alliance disabled
-                robotAlliance.setEnabled(false);
+                final Spinner units = ((AlertDialog) dialog).findViewById(R.id.units);
+                ArrayAdapter<CharSequence> unitAdapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.units, R.layout.spinner);
+                units.setAdapter(unitAdapter);
 
                 //List user names available
-                userIDSpinner = linearLayout.findViewById(R.id.userID);
+                userIDSpinner = gridLayout.findViewById(R.id.userID);
 
                 //set a listener to make sure to adjust other fields based on it will change as well
                 userIDSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -714,67 +675,32 @@ public class MainActivity extends ListeningActitivty {
                 SharedPreferences prefs = getSharedPreferences("userID", MODE_PRIVATE);
                 userIDSpinner.setSelection(prefs.getInt("userID", -1) + 1);
 
-                //Setup spinner for the side the field is being viewed from
-                Spinner viewingSide = linearLayout.findViewById(R.id.viewingSide);
-
-                ArrayAdapter<CharSequence> viewingSideAdapter = ArrayAdapter.createFromResource(MainActivity.this, R.array.viewingSides, R.layout.spinner);
-                viewingSide.setAdapter(viewingSideAdapter);
-
                 //start bluetooth, all views are probably ready now
                 startListenerThread();
 
-                //set a listener for the match number as well to make sure to adjust other fields based on it will change as well
-                ((EditText) linearLayout.findViewById(R.id.matchNumber)).addTextChangedListener(new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable editable) {
-                        //don't update if the schedule is being overridden, it will be handled on the press of the ok button
-                        if (!overrideSchedule) {
-                            //update match number based on what has been typed
-                            EditText roundInput = linearLayout.findViewById(R.id.matchNumber);
-                            if (!roundInput.getText().toString().equals("")) {
-                                matchNumber = Integer.parseInt(roundInput.getText().toString());
-                            }
-
-                            dialogScheduleDataChange(userIDSpinner, dialog);
-                        }
-                    }
-                });
-
-                if (incrementMatchNumber) {
-                    ((EditText) linearLayout.findViewById(R.id.matchNumber)).setText(matchNumber + 1 + "");
-                }
-
                 overriddenScoutName = new EditText(MainActivity.this);
                 overriddenScoutName.setHint("Scout Name");
+                //Add column span property
+                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+                params.columnSpec = GridLayout.spec(0, 2);
+                overriddenScoutName.setLayoutParams(params);
 
                 //if the schedule has already been overridden, set it to overridden
                 if (overrideSchedule) {
-                    linearLayout.findViewById(R.id.robotNumber).setEnabled(true);
-                    linearLayout.findViewById(R.id.robotAlliance).setEnabled(true);
+                    gridLayout.findViewById(R.id.robotNumber).setEnabled(true);
 
-                    linearLayout.findViewById(R.id.userID).setEnabled(false);
-                    ((Spinner) linearLayout.findViewById(R.id.userID)).setSelection(0);
-                    linearLayout.addView(overriddenScoutName, 0);
+                    gridLayout.findViewById(R.id.userID).setEnabled(false);
+                    ((Spinner) gridLayout.findViewById(R.id.userID)).setSelection(0);
+                    gridLayout.addView(overriddenScoutName, 4);
                 }
 
                 if (BuildConfig.DEBUG) {
-                    ((EditText) linearLayout.findViewById(R.id.matchNumber)).setText("1");
-                    ((EditText) linearLayout.findViewById(R.id.robotNumber)).setText("2809");
+                    ((EditText) gridLayout.findViewById(R.id.robotNumber)).setText("2809");
                     overriddenScoutName.setText("Debug Scout Name Build " + BuildConfig.VERSION_NAME);
                 }
 
                 //make it so that you can override the schedule if you need to
-                linearLayout.findViewById(R.id.matchNumber).setOnLongClickListener(new View.OnLongClickListener() {
+                gridLayout.findViewById(R.id.robotNumber).setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
                         new AlertDialog.Builder(MainActivity.this)
@@ -786,12 +712,12 @@ public class MainActivity extends ListeningActitivty {
                                         "allow you to edit it.")
                                 .setPositiveButton("I would like to manually choose a robot number", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        linearLayout.findViewById(R.id.robotNumber).setEnabled(true);
-                                        linearLayout.findViewById(R.id.robotAlliance).setEnabled(true);
+                                        gridLayout.findViewById(R.id.robotNumber).setEnabled(true);
 
-                                        linearLayout.findViewById(R.id.userID).setEnabled(false);
-                                        ((Spinner) linearLayout.findViewById(R.id.userID)).setSelection(0);
-                                        linearLayout.addView(overriddenScoutName, 0);
+                                        gridLayout.findViewById(R.id.userID).setEnabled(false);
+                                        ((Spinner) gridLayout.findViewById(R.id.userID)).setSelection(0);
+
+                                        gridLayout.addView(overriddenScoutName, 4);
 
                                         overrideSchedule = true;
                                     }
@@ -802,17 +728,6 @@ public class MainActivity extends ListeningActitivty {
                         return false;
                     }
                 });
-
-                //set spinners to previous values
-                prefs = getSharedPreferences("robotAlliance", MODE_PRIVATE);
-                if(prefs.getInt("day", -1) == day && prefs.getInt("month", -1) == month && prefs.getInt("year", -1) == year){
-                    robotAlliance.setSelection(prefs.getInt("robotAlliance", 0));
-                }
-
-                prefs = getSharedPreferences("viewingSide", MODE_PRIVATE);
-                if(prefs.getInt("day", -1) == day && prefs.getInt("month", -1) == month && prefs.getInt("year", -1) == year){
-                    viewingSide.setSelection(prefs.getInt("viewingSide", 0));
-                }
 
                 //once they hit ok
                 ((AlertDialog) dialog).getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
@@ -863,94 +778,13 @@ public class MainActivity extends ListeningActitivty {
         }
 
         //change other buttons on the dialog box accordingly
-        View linearLayout = ((AlertDialog) dialog).findViewById(R.id.dialogLinearLayout);
+        View gridLayout = ((AlertDialog) dialog).findViewById(R.id.dialogGridLayout);
 
-        EditText roundInput = linearLayout.findViewById(R.id.matchNumber);
-
-        String roundText = roundInput.getText().toString();
-        if (roundText.equals("")) {
-            //The user has not specified what match number it is yet
-            runOnUiThread(new Thread() {
-                public void run() {
-                    Toast toast = Toast.makeText(MainActivity.this, "You must specify the match number",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                    matchNumAlertToast = toast;
-                }
-            });
-
-            return;
-        }
-        //if the match number has been selected it can be used
-        int round = Integer.parseInt(roundText) - 1;
 
         //set userID
         userID = newUserID;
 
-        EditText robotNumInput = linearLayout.findViewById(R.id.robotNumber);
-        Spinner robotAlliance = linearLayout.findViewById(R.id.robotAlliance);
-
-        if (round >= schedules.get(MainActivity.this.userID).robots.size() || round < 0){
-            //The match number is too high
-            runOnUiThread(new Thread() {
-                public void run() {
-                    Toast toast = Toast.makeText(MainActivity.this, "This match number is not on the schedule yet, choose another",
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                    matchNumAlertToast = toast;
-                }
-            });
-
-            //set the robot number to blank
-            robotNumInput.setText("");
-            //reset alliance
-            robotAlliance.setSelection(0);
-            return;
-        }
-
-        //find the robot alliance
-        alliance = schedules.get(userID).alliances.get(round);
-
-        int robotNum = schedules.get(userID).robots.get(round);
-
-        //this scout is off this match
-        if (robotNum == -1) {
-
-            int matchBack = getNextMatchOn();
-
-            final String message;
-            if (matchBack == -1) {
-                //they never need to come back
-                message = "You are off this match You are off forever according to the schedule! If that does not make sense, ask somebody if something is up.";
-            } else {
-                message = "You are off this match! Come back at match number " + matchBack;
-            }
-
-            //The match number is too high
-            runOnUiThread(new Thread() {
-                public void run() {
-                    Toast toast = Toast.makeText(MainActivity.this, message,
-                            Toast.LENGTH_SHORT);
-                    toast.show();
-                    matchNumAlertToast = toast;
-                }
-            });
-
-            //set the robot number to blank
-            robotNumInput.setText("");
-            //reset alliance
-            robotAlliance.setSelection(0);
-            return;
-        }
-
-        robotNumInput.setText(String.valueOf(robotNum));
-
-        if (alliance) {
-            robotAlliance.setSelection(1);
-        } else {
-            robotAlliance.setSelection(2);
-        }
-
+        EditText robotNumInput = gridLayout.findViewById(R.id.robotNumber);
     }
 
     //when the ok button on the alert is pressed
@@ -963,34 +797,25 @@ public class MainActivity extends ListeningActitivty {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.dialog, null);
 
-        View linearLayout = ((AlertDialog) dialog).findViewById(R.id.dialogLinearLayout);
+        View gridLayout = ((AlertDialog) dialog).findViewById(R.id.dialogGridLayout);
 
-        EditText robotNumInput = linearLayout.findViewById(R.id.robotNumber);
-        EditText roundInput = linearLayout.findViewById(R.id.matchNumber);
+        EditText robotNumInput = gridLayout.findViewById(R.id.robotNumber);
+        EditText robotWeightInput = gridLayout.findViewById(R.id.robotWeight);
 
         //spinners
-        Spinner robotAlliance = linearLayout.findViewById(R.id.robotAlliance);
-        Spinner viewingSide = linearLayout.findViewById(R.id.viewingSide);
-        Spinner userID = linearLayout.findViewById(R.id.userID);
+        Spinner userID = gridLayout.findViewById(R.id.userID);
+        Spinner robotWeightUnits = gridLayout.findViewById(R.id.units);
 
-        if(robotAlliance.getSelectedItemPosition() == 0 || viewingSide.getSelectedItemPosition() == 0){
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(MainActivity.this, "Please select which side you are on, and what alliance your robot is on...",
-                            Toast.LENGTH_LONG).show();
-                }
-            });
+        //buttons
+        Button addPhoto = gridLayout.findViewById(R.id.addPhoto);
 
-            return;
-        }
+        //gridLayouts
+        GridLayout photoGrid = gridLayout.findViewById(R.id.photoGrid);
 
         try {
             robotNum = Integer.parseInt(robotNumInput.getText().toString());
-            matchNumber = Integer.parseInt(roundInput.getText().toString());
-
-            alliance = robotAlliance.getSelectedItemPosition() == 2;
-            side = viewingSide.getSelectedItemPosition() == 2;
+            robotWeight = Integer.parseInt(robotWeightInput.getText().toString());
+            robotUnits = robotWeightUnits.getSelectedItem().toString();
 
             SharedPreferences prefs = getSharedPreferences("userID", MODE_PRIVATE);
             SharedPreferences.Editor editor = prefs.edit();
@@ -998,35 +823,6 @@ public class MainActivity extends ListeningActitivty {
             editor.apply();
 
             scoutName = overriddenScoutName.getText().toString();
-
-            //save selections for robot alliance
-            prefs = getSharedPreferences("robotAlliance", MODE_PRIVATE);
-            editor = prefs.edit();
-            editor.putInt("robotAlliance", robotAlliance.getSelectedItemPosition());
-            editor.putInt("year", year);
-            editor.putInt("month", month);
-            editor.putInt("day", day);
-            editor.apply();
-
-            //save selections for seating placement
-            prefs = getSharedPreferences("viewingSide", MODE_PRIVATE);
-            editor = prefs.edit();
-            editor.putInt("viewingSide", viewingSide.getSelectedItemPosition());
-            editor.putInt("year", year);
-            editor.putInt("month", month);
-            editor.putInt("day", day);
-            editor.apply();
-
-            if (matchNumber > 99) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(MainActivity.this, "Invalid Match Number",
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
-                return;
-            }
 
             if (userID.getSelectedItemPosition() == 0 && !overrideSchedule) {
                 runOnUiThread(new Runnable() {
@@ -1050,7 +846,7 @@ public class MainActivity extends ListeningActitivty {
             return;
         }
         robotNumText = findViewById(R.id.robotNum);
-        robotNumText.setText("Robot: " + robotNum + " " + "Round: " + matchNumber);
+        robotNumText.setText("Robot: " + robotNum );
 
         updateMatchesLeft();
 
