@@ -1,20 +1,32 @@
-package ca.lakeeffect.scoutingapp;
+package ca.lakeeffect.pitscoutingapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.RatingBar;
+import android.widget.EditText;
+import android.widget.GridLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class QualitativePage extends Fragment implements View.OnClickListener {
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Created by Ajay on 9/25/2016.
+ */
+public class StrategyPage extends Fragment implements View.OnClickListener{
 
     Button submit;
 
@@ -25,35 +37,16 @@ public class QualitativePage extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflator, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflator.inflate(R.layout.qualitative_page, container, false);
 
-        final RatingBar defenceRating = view.findViewById(R.id.defenceRating);
-        final TextView defenceText = view.findViewById(R.id.defenceText);
+        View view = inflator.inflate(R.layout.strategy_page, container, false);
 
-        defenceRating.setVisibility(View.INVISIBLE);
-        defenceText.setVisibility(View.INVISIBLE);
-
-        final CheckBox defence = (CheckBox) view.findViewById(R.id.defense);
-
-        defence.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                if (checked) {
-                    defenceRating.setVisibility(View.VISIBLE);
-                    defenceText.setVisibility(View.VISIBLE);
-                } else {
-                    defenceRating.setVisibility(View.INVISIBLE);
-                    defenceText.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-
-        view.setTag("page5");
+        view.setTag("page6");
 
         submit = view.findViewById(R.id.submit);
         submit.setOnClickListener(this);
 
         return view;
+
     }
 
     public void onClick(View v) {

@@ -1,4 +1,4 @@
-package ca.lakeeffect.scoutingapp;
+package ca.lakeeffect.pitscoutingapp;
 
 /**
  * Created by ramachandra on 12/02/2018.
