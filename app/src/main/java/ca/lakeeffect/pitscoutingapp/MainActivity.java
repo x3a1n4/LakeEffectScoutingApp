@@ -10,11 +10,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.percent.PercentRelativeLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
@@ -34,6 +38,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -797,7 +802,7 @@ public class MainActivity extends ListeningActitivty {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View layout = inflater.inflate(R.layout.dialog, null);
 
-        View gridLayout = ((AlertDialog) dialog).findViewById(R.id.dialogGridLayout);
+        final View gridLayout = ((AlertDialog) dialog).findViewById(R.id.dialogGridLayout);
 
         EditText robotNumInput = gridLayout.findViewById(R.id.robotNumber);
         EditText robotWeightInput = gridLayout.findViewById(R.id.robotWeight);
@@ -805,12 +810,6 @@ public class MainActivity extends ListeningActitivty {
         //spinners
         Spinner userID = gridLayout.findViewById(R.id.userID);
         Spinner robotWeightUnits = gridLayout.findViewById(R.id.units);
-
-        //buttons
-        Button addPhoto = gridLayout.findViewById(R.id.addPhoto);
-
-        //gridLayouts
-        GridLayout photoGrid = gridLayout.findViewById(R.id.photoGrid);
 
         try {
             robotNum = Integer.parseInt(robotNumInput.getText().toString());
@@ -847,6 +846,28 @@ public class MainActivity extends ListeningActitivty {
         }
         robotNumText = findViewById(R.id.robotNum);
         robotNumText.setText("Robot: " + robotNum );
+
+        //Do Images
+        /*
+        Button addImage = findViewById(R.id.addPhoto);
+        final GridLayout imageGrid = findViewById(R.id.imageGrid);
+        final Context context = this;
+        addImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dispatchTakePictureIntent();
+
+                ImageView imageView = new ImageView(context);
+
+                onActivityResult(1, 0, new Intent(MediaStore.ACTION_IMAGE_CAPTURE), imageView);
+
+                int childCount = imageGrid.getChildCount();
+
+
+                GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+            }
+        });
+        */
 
         updateMatchesLeft();
 
@@ -914,7 +935,7 @@ public class MainActivity extends ListeningActitivty {
         return strings;
     }
 
-     public static void startNotificationAlarm(Context context) {
+    public static void startNotificationAlarm(Context context) {
         AlarmManager alarm = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent i = new Intent (context, PendingNotification.class);
         PendingIntent pending = PendingIntent.getBroadcast(context, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -922,5 +943,7 @@ public class MainActivity extends ListeningActitivty {
         System.out.println(date.toString());
         alarm.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+1000*60*20, pending);
     }
+
+
 
 }

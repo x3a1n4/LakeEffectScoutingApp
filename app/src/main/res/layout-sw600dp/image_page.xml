@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id = "@+id/imagePageLayout">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v7.widget.GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            app:rowCount="10"
+            app:columnCount="2"
+            app:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/rectangle"
+            android:id="@+id/imageGrid"
+            >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add Photo"
+                android:id="@+id/addPhoto"
+                android:textSize="@dimen/text_small"
+                app:layout_row="0"
+                app:layout_column="0"
+                app:layout_columnSpan="2"
+                app:layout_gravity="center_horizontal"
+                />
+        </android.support.v7.widget.GridLayout>
+    </ScrollView>
+</android.support.percent.PercentRelativeLayout>

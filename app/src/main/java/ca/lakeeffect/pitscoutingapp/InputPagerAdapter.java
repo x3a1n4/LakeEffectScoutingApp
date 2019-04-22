@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 public class InputPagerAdapter extends FragmentStatePagerAdapter {
 
-    final int PAGENUM = 6;
+    final int PAGENUM = 7;
 
     public DrivetrainPage drivetrainPage;
     public CargoHatchPage cargoPage;
@@ -19,6 +19,7 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
     public SandstormPage sandstormPage;
     public ClimbingPage climbingPage;
     public StrategyPage strategyPage;
+    public ImagePage imagePage;
 
     //Instatiate pages
     public InputPagerAdapter(FragmentManager fm) {
@@ -29,6 +30,7 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
         sandstormPage = new SandstormPage();
         climbingPage = new ClimbingPage();
         strategyPage = new StrategyPage();
+        imagePage = new ImagePage();
     }
     
     //More instatiation
@@ -51,6 +53,9 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
                 climbingPage = new ClimbingPage();
                 return climbingPage;
             case 5:
+                imagePage = new ImagePage();
+                return imagePage;
+            case 6:
                 strategyPage = new StrategyPage();
                 return strategyPage;
         }
@@ -77,6 +82,8 @@ public class InputPagerAdapter extends FragmentStatePagerAdapter {
             case 4:
                 return "Climbing";
             case 5:
+                return "Images";
+            case 6:
                 return "Strategy";
         }
         return "";
