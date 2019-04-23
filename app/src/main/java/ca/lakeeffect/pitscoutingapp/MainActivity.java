@@ -64,7 +64,7 @@ import java.util.UUID;
 public class MainActivity extends ListeningActitivty {
     TextView robotNumText; //robotnum and matchNumber
 
-    int robotNum = 2708;
+    public static int robotNum = 2708;
     int robotWeight;
     String robotUnits;
 
@@ -391,7 +391,7 @@ public class MainActivity extends ListeningActitivty {
         File sdCard = Environment.getExternalStorageDirectory();
 //        File dir = new File (sdCard.getPath() + "/ScoutingData/");
 
-        File file = new File(sdCard.getPath() + "/#ScoutingData/" + robotNum + ".csv");
+        File file = new File(sdCard.getPath() + "/#PitScoutingData/" + robotNum + ".csv");
 
         try {
 

@@ -47,6 +47,7 @@ public class ImagePage extends Fragment{
     private Button takePictureButton;
     private Uri file;
     private GridLayout imageGrid;
+    private static Integer picNum;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,16 +60,22 @@ public class ImagePage extends Fragment{
 
         view.setTag("page6");
 
-        Button addImage = view.findViewById(R.id.addPhoto);
+        //reset num of pics
+        picNum = 0;
+
+        takePictureButton = view.findViewById(R.id.addPhoto);
         imageGrid = view.findViewById(R.id.imageGrid);
 
-        addImage.setOnClickListener(new View.OnClickListener() {
+        takePictureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //From https://stackoverflow.com/questions/48117511/exposed-beyond-app-through-clipdata-item-geturi
-                StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
-                StrictMode.setVmPolicy(builder.build());
-                takePicture(view);
+                if(takePictureButton.isEnabled()){
+                    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                    StrictMode.setVmPolicy(builder.build());
+                    takePicture(view);
+                }
+
             }
         });
 
@@ -88,29 +95,41 @@ public class ImagePage extends Fragment{
     }
 
     private static File getOutputMediaFile(){
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "CameraDemo");
+        File mediaStorageDir = new File(Environment.getExternalStorageDirectory().getPath(), "#PitScoutingData");
 
         if (!mediaStorageDir.exists()){
             if (!mediaStorageDir.mkdirs()){
-                Log.d("CameraDemo", "failed to create directory");
+                Log.d("#PitScoutingData", "failed to create directory");
                 return null;
             }
         }
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        return new File(mediaStorageDir.getPath() + File.separator +
-                "IMG_"+ timeStamp + ".jpg");
-    }
 
+        File file;
+        if(picNum == 0){
+            file = new File(mediaStorageDir.getPath() + File.separator +
+                    MainActivity.robotNum + ".PNG");
+        }else{
+            file = new File(mediaStorageDir.getPath() + File.separator +
+                    MainActivity.robotNum + "_" + picNum + ".PNG");
+        }
+
+        picNum++;
+        return file;
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 100) {
             if (resultCode == RESULT_OK) {
                 ImageView imageView = new ImageView(this.getContext());
                 imageView.setImageURI(file);
+
                 //add image
                 imageGrid.addView(imageView);
+
+                //disable button
+                takePictureButton.setEnabled(false);
             }
         }
     }
