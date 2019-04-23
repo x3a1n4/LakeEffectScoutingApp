@@ -109,10 +109,10 @@ public class ImagePage extends Fragment{
         File file;
         if(picNum == 0){
             file = new File(mediaStorageDir.getPath() + File.separator +
-                    MainActivity.robotNum + ".PNG");
+                    MainActivity.robotNum + ".JPG");
         }else{
             file = new File(mediaStorageDir.getPath() + File.separator +
-                    MainActivity.robotNum + "_" + picNum + ".PNG");
+                    MainActivity.robotNum + "_" + picNum + ".JPG");
         }
 
         picNum++;
